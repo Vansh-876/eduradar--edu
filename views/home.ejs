@@ -1,0 +1,344 @@
+<% layout("/layouts/boilerplate") %>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    .hero-section {
+      position: relative;
+      background: url('/images/homebg.jpg') center center/cover no-repeat;
+      padding: 140px 20px 50px;
+      text-align: center;
+      color: #fff;
+      min-height: 450px;
+      /* ✅ instead of fixed height */
+      overflow: hidden;
+      /* ✅ avoid background or children overflow */
+    }
+
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to right, rgba(42, 115, 232, 0.8), rgba(46, 16, 82, 0.8));
+      z-index: 0;
+    }
+
+    .hero-section .btn {
+      border-radius: 6px;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.95rem;
+      background-color: #e6b631;
+      color: white;
+      font-weight: 550;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .hero-section .btn:hover {
+      background-color: #e0a800;
+      /* deeper yellow */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .hero-section * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-section h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .hero-section input::placeholder {
+      color: #7c848b;
+      /* medium gray */
+      opacity: 1;
+      /* ensure visibility */
+    }
+
+    .hero-section input.form-control {
+      border: 1.5px solid #ccc;
+      border-color: #2A73E8;
+      border-radius: 25px;
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+      background-color: rgba(255, 255, 255, 0.95);
+      transition: border 0.3s ease;
+    }
+
+    .hero-section input.form-control:focus {
+      border-color: #2A73E8;
+      box-shadow: 0 0 0 0.2rem rgba(42, 115, 232, 0.25);
+    }
+
+    .search-form {
+      margin-top: 30px;
+    }
+
+    .intro-section,
+    .feature-section,
+    .testimonial-section,
+    .steps-section,
+    .cta-section {
+      padding: 60px 0;
+    }
+
+    .steps-section {
+      background-color: #f8f9fa;
+    }
+
+    .step-box {
+      text-align: center;
+      padding: 30px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      transition: 0.3s ease;
+      margin: auto;
+    }
+
+    .step-box:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-box {
+      background: #f0d7d7e3;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-4px);
+    }
+
+    .testimonial-section {
+      background: linear-gradient(to right, #2A73E8, #2c0859);
+      color: #fff;
+      text-align: center;
+    }
+
+    .testimonial-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 16px;
+      margin: 0 auto;
+      height: 100%;
+    }
+
+    .testimonial-box p {
+      font-style: italic;
+    }
+
+    .cta-section {
+      background: white;
+      color: black;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 12px;
+    }
+
+    .cta-section .btn {
+      background-color: rgb(255, 197, 49);
+      color: white;
+      border: none;
+      font-weight: 600;
+      padding: 0.6rem 1.5rem;
+      border-radius: 25px;
+      font-size: 1rem;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .cta-section .btn:hover {
+      background-color: #e0a800;
+      /* slightly deeper yellow */
+      color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+
+
+    .feature-section {
+      background-color: #f8f9fa;
+    }
+
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+      /* Prevent horizontal scroll */
+    }
+
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 100px 20px 50px;
+        min-height: 380px;
+        /* ✅ still hold height to avoid layout collapse */
+      }
+
+      #heroSearch {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+
+      .hero-section p {
+        font-size: 1rem;
+      }
+
+      .steps-section {
+        margin-top: -55px;
+      }
+
+      .feature-section {
+        margin-top: -20px;
+      }
+      .feature-box{
+        height: 70%;
+      }
+    }
+  </style>
+
+  <div class="hero-section">
+    <div class="container">
+      <h1>Discover & Explore Nearby Services</h1>
+      <p>Your one-stop platform for Bookstores, Libraries, Coaching Centers, and more</p>
+      <form id="heroSearch" action="/listings" method="GET" class="row g-2 justify-content-center search-form">
+        <div class="col-md-4">
+          <input type="text" name="location" class="form-control" placeholder="Enter Location (e.g. Delhi)">
+        </div>
+        <div class="col-md-4">
+          <input type="text" name="search" class="form-control" placeholder="Search services...">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-warning w-100">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="container intro-section text-center">
+    <h2 class="fw-bold mb-4">Welcome to EduRadar</h2>
+
+    <!-- Full paragraph for desktop -->
+    <p class="lead d-none d-md-block">
+      We help you find educational and academic services with ease and trust. Whether you're looking for a nearby
+      bookstore, a reputed coaching center, or just a peaceful library, EduRadar makes the search fast and effortless.
+    </p>
+
+    <!-- Shorter paragraph for mobile -->
+    <p class="lead d-block d-md-none">
+      Discover libraries, bookstores, and coaching centers near you <br> Quick & Reliable </br>
+    </p>
+  </div>
+
+
+  <div class="steps-section">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5">How It Works</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="step-box">
+            <h5 class="fw-semibold">1. Search</h5>
+            <p>Use our powerful search tool to find exactly what you need by location or keyword.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-box">
+            <h5 class="fw-semibold">2. Explore</h5>
+            <p>Browse through verified and detailed listings across multiple categories.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-box">
+            <h5 class="fw-semibold">3. Connect</h5>
+            <p>Reach out directly to your chosen services and get started instantly!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-section">
+    <div class="container">
+      <h2 class="fw-bold mb-4">What Our Users Say</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="testimonial-box">
+            <p>"Found the perfect coaching center in no time! Truly helpful platform."</p>
+            <h6 class="mt-3">- Riya Sharma</h6>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="testimonial-box">
+            <p>"Easy to navigate and very intuitive. Saved me a lot of time."</p>
+            <h6 class="mt-3">- Arjun Verma</h6>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="testimonial-box">
+            <p>"Great UI, amazing suggestions. Loved using this service!"</p>
+            <h6 class="mt-3">- Sneha Kapoor</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="container">
+      <h2 class="fw-bold">Ready to Get Started?</h2>
+      <p class="lead">Explore listings or create an account to access personalized features.</p>
+      <a href="/listings" class="btn btn-lg">Explore Now</a>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="feature-section">
+    <h4 class="fw-bold text-center mt-5 mb-4">Top Features</h4>
+    <div class="row text-center">
+      <div class="col-md-3 mb-4">
+        <i class="bi bi-lightbulb-fill text-primary fs-2"></i>
+        <p class="fw-medium mt-2">Personalized Suggestions</p>
+      </div>
+      <div class="col-md-3 mb-4">
+        <i class="bi bi-shield-lock-fill text-success fs-2"></i>
+        <p class="fw-medium mt-2">Secure Access</p>
+      </div>
+      <div class="col-md-3 mb-4">
+        <i class="bi bi-speedometer2 text-danger fs-2"></i>
+        <p class="fw-medium mt-2">Fast Navigation</p>
+      </div>
+      <div class="col-md-3 mb-4">
+        <i class="bi bi-people-fill text-warning fs-2"></i>
+        <p class="fw-medium mt-2">Trusted by Thousands</p>
+      </div>
+    </div>
+  </div>

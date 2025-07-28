@@ -1,0 +1,15 @@
+<% layout('layouts/boilerplate') %>
+  <body>
+    <div class="container error-container">
+      <div class="error-card">
+        <div class="error-code">
+          <%= err.statusCode || 500 %>
+        </div>
+        <div class="error-msg">
+          <%= err.message || "Something went wrong!" %>
+        </div>
+        <a href="/" class="btn btn-outline-primary">← Go Home</a>
+      </div>
+    </div>
+  </body>
+</html>

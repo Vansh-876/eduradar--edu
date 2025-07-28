@@ -1,0 +1,379 @@
+<style>
+  /* ---------------------- Base Styles ---------------------- */
+
+  .navbar {
+    background: linear-gradient(to right, #2A73E8, #2c0859);
+    padding: 0.7rem 0.7rem;
+    height: 5rem;
+    border-bottom: 2rem solid white;
+  }
+
+  .navbar-brand {
+    margin-left: 15px;
+    padding-right: 1rem;
+    font-size: 1.8rem !important;
+    color: white !important;
+    display: flex;
+    font-weight: 400 !important;
+    align-items: center;
+  }
+
+  .navbar-brand i {
+    margin-right: 10px;
+    font-size: 2.6rem !important;
+  }
+
+  .nav-link {
+    color: white !important;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+  }
+
+  .nav-link i {
+    margin-right: 6px;
+  }
+
+  .nav-link:hover {
+    color: yellow !important;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .btn-search {
+    background-color: #fbc531;
+    color: #fff;
+    border-radius: 8px;
+  }
+
+  .btn-search:hover {
+    background-color: #e6b022;
+    color: #fff;
+  }
+
+  .btn-search i {
+    font-size: 1rem;
+  }
+
+  .search-input {
+    border-radius: 8px;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .dropdown-menu {
+    transition: all 0.2s ease-in-out;
+  }
+
+  .dropdown-menu li a:hover {
+    background: #f0f2f5;
+    border-radius: 8px;
+  }
+
+  .dropdown-toggle img:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .navbar-toggler {
+    border-color: white;
+  }
+
+  .navbar-toggler:hover {
+    border-color: white;
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
+
+  #navbarSearch,
+  #heroSearch {
+    transition: all 0.3s ease;
+  }
+
+  .desktop-search-only {
+    display: none !important;
+  }
+
+  /* ---------------------- Media Query: min-width 768px ---------------------- */
+
+  @media (min-width: 867px) {
+    .desktop-search-only {
+      display: flex !important;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .desktop-search-only form {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: 1rem;
+    }
+
+    .desktop-search-only .search-input {
+      max-width: 200px;
+    }
+
+    .desktop-search-only .form-control,
+    .desktop-search-only .btn-search {
+      height: 40px;
+      padding: 0.375rem 1rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .btn-search i {
+      display: inline !important;
+      font-size: 1rem;
+    }
+  }
+
+  /* ---------------------- Media Query: 875px to 1013px ---------------------- */
+
+  @media (max-width: 1200px) and (min-width: 775px) {
+    .navbar-nav.ms-auto {
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .navbar-nav .nav-link {
+      padding: 0.25rem 0.75rem;
+      white-space: nowrap;
+      font-size: 0.9rem;
+    }
+
+    .navbar-nav .dropdown {
+      margin-left: 0.5rem;
+    }
+
+    .navbar-nav img.rounded-circle {
+      width: 35px !important;
+      height: 35px !important;
+    }
+
+    .desktop-search-only .form-control,
+    .desktop-search-only .btn-search {
+      height: 35px;
+      padding: 0.375rem 0.8rem;
+      font-size: 0.7rem;
+      line-height: 1.2;
+    }
+  }
+
+  /* ---------------------- Media Query: max-width 768px ---------------------- */
+
+  @media (max-width: 866px) {
+    .navbar-collapse {
+      /* background: linear-gradient(to right, rgba(44, 8, 89, 0.75), rgba(42, 115, 232, 0.75)); */
+      padding: 1rem;
+      border-radius: 12px;
+      /* backdrop-filter: blur(10px); */
+      /* -webkit-backdrop-filter: blur(10px); */
+      /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); */
+      /* border: 1px solid rgba(255, 255, 255, 0.1); */
+      transition: all 0.3s ease-in-out;
+    }
+
+    .navbar .container-fluid {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .navbar-brand {
+      margin-left: 5px !important;
+    }
+
+    .navbar-nav {
+      align-items: center !important;
+    }
+
+    .navbar-collapse .nav-link {
+      padding: 0.5rem 1rem;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  /* ---------------------- Media Query: max-width 700px ---------------------- */
+
+  @media (max-width: 700px) {
+    .navbar-nav.ms-auto {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .navbar-nav .nav-link {
+      font-size: 0.95rem;
+    }
+
+    .dropdown-menu {
+      font-size: 0.9rem;
+    }
+
+    .navbar-collapse {
+      gap: 1rem;
+    }
+
+    .navbar-nav img.rounded-circle {
+      width: 35px !important;
+      height: 35px !important;
+    }
+
+    .navbar-collapse .nav-link {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+
+  @media (max-width: 900px) and (min-width: 768px) {
+    .nav-explore {
+      display: none !important;
+    }
+  }
+</style>
+
+<nav class="navbar navbar-expand-md border-bottom fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="/">
+      <i class="bi bi-mortarboard"></i>EduRadar
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse " id="navbarNav">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/"><i class="fa-solid fa-house"></i><b>Home</b></a>
+        <a class="nav-link nav-explore <% if(activePage === 'listings'){ %>active<% } %>" href="/listings">
+          <i class="bi bi-card-list"></i><b>Explore</b>
+        </a>
+      </div>
+
+      <% if (activePage==='listings' ) { %>
+        <div class="navbar-nav ms-auto desktop-search-only">
+          <form id="navbarSearch" action="/listings" method="GET">
+            <input type="search" name="search" placeholder="Search" class="form-control me-2 search-input"
+              value="<%= search %>">
+            <input type="search" name="location" placeholder="Location" class="form-control me-2 search-input"
+              value="<%= location %>">
+            <button type="submit" class="btn btn-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+        </div>
+        <% } %>
+
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link" href="/add-business">
+              <i class="bi bi-plus-circle"></i> <b>Add Your Business</b>
+            </a>
+
+            <% if (!currentUser) { %>
+              <a class="nav-link" href="/register"><b>Register</b></a>
+
+              <% } else if (currentUser.role.includes('vendor')) { %>
+                <!-- Vendor Navbar -->
+                <div class="dropdown">
+                  <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                    id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="<%= currentUser.profileImage?.url || '/images/default-profile.jpg' %>" alt="user"
+                      width="40" height="40" class="rounded-circle">
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 p-3" aria-labelledby="profileDropdown"
+                    style="min-width: 260px; border-radius: 15px;">
+                    <li class="text-center">
+                      <img src="<%= currentUser.profileImage?.url || '/images/default-profile.jpg' %>" alt="user"
+                        width="60" height="60" class="rounded-circle mb-2">
+                      <div class="fw-semibold fs-6">
+                        <%= currentUser.username %>
+                      </div>
+                      <div class="text-muted small mb-2">
+                        <%= currentUser.email %>
+                      </div>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="/vendor/dashboard"><i
+                          class="bi bi-speedometer2"></i> Dashboard</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2 text-danger" href="/vendor/logout"><i
+                          class="bi bi-box-arrow-right"></i> Logout</a></li>
+                  </ul>
+                </div>
+
+                <% } else { %>
+                  <!-- Normal User Navbar -->
+                  <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                      id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="<%= currentUser.profileImage?.url || '/images/default-profile.jpg' %>" alt="user"
+                        width="40" height="40" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 p-3" aria-labelledby="profileDropdown"
+                      style="min-width: 260px; border-radius: 15px;">
+                      <li class="text-center">
+                        <img src="<%= currentUser.profileImage?.url || '/images/default-profile.jpg' %>" alt="user"
+                          width="60" height="60" class="rounded-circle mb-2">
+                        <div class="fw-semibold fs-6">
+                          <%= currentUser.username %>
+                        </div>
+                        <div class="text-muted small mb-2">
+                          <%= currentUser.email %>
+                        </div>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2" href="/profile/settings"><i
+                            class="bi bi-person-gear"></i> My Profile</a></li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2" href="/dashboard"><i
+                            class="bi bi-speedometer2"></i> Dashboard</a></li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2" href="/notifications"><i
+                            class="bi bi-bell"></i> Notifications</a></li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2" href="/bookmarks"><i
+                            class="bi bi-bookmark-star"></i> Saved Items</a></li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2" href="/profile/change-password"><i
+                            class="bi bi-key"></i> Change Password</a></li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2 text-danger" href="/logout"><i
+                            class="bi bi-box-arrow-right"></i> Logout</a></li>
+                    </ul>
+                  </div>
+
+                  <% } %>
+          </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  function handleOutsideClickToCloseNavbar() {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+
+    document.addEventListener('click', function (event) {
+      if (window.innerWidth <= 768) {
+        if (
+          navbarToggler &&
+          navbarCollapse.classList.contains('show') &&
+          !navbarCollapse.contains(event.target) &&
+          !navbarToggler.contains(event.target)
+        ) {
+          navbarToggler.click(); // close navbar
+        }
+      }
+    });
+  }
+
+  // Run after DOM is ready
+  document.addEventListener('DOMContentLoaded', handleOutsideClickToCloseNavbar);
+</script>

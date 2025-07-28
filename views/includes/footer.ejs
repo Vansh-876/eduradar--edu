@@ -1,0 +1,187 @@
+<style>
+  .modern-footer {
+    background: #111;
+    color: #ccc;
+    padding: 40px 20px 30px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .footer-col h4 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-col ul li {
+    margin: 10px 0;
+  }
+
+  .footer-col ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-col ul li a:hover {
+    color: #0d6efd;
+  }
+
+  .footer-bottom {
+    text-align: center;
+  }
+
+  .logo-col h2 {
+    color: #0d6efd;
+    margin-bottom: 10px;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1.5px solid #444;
+    border-radius: 6px;
+    background-color: #1a1a1a;
+    color: #eee;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .newsletter-form input::placeholder {
+    color: #aaa;
+  }
+
+  .newsletter-form input:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+  }
+
+  .newsletter-form button {
+    background: #0d6efd;
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .newsletter-form button:hover {
+    background: #0b5ed7;
+    transform: translateY(-1px);
+  }
+
+  .social-icons a {
+    margin-right: 10px;
+    font-size: 1.4rem;
+    color: #ccc;
+    transition: color 0.3s ease;
+  }
+
+  .social-icons a:hover {
+    color: #0d6efd;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #222;
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #999;
+  }
+
+  @media (max-width: 768px) {
+    .footer-col {
+      text-align: center;
+    }
+
+    .social-icons {
+      justify-content: center;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .newsletter-form {
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: nowrap;
+      margin-bottom: 1.2rem;
+    }
+
+    .newsletter-form input {
+      max-width: 250px;
+      width: auto;
+    }
+
+    .newsletter-form button {
+      width: auto;
+    }
+  }
+</style>
+<footer class="modern-footer">
+  <div class="footer-container">
+    <div class="footer-col logo-col">
+      <h2>EduRadar</h2>
+      <p>Your personalized platform for smarter, structured, and simplified study.</p>
+      <div class="social-icons">
+        <a href="#"><i class="bi bi-facebook"></i></a>
+        <a href="#"><i class="bi bi-twitter"></i></a>
+        <a href="#"><i class="bi bi-linkedin"></i></a>
+        <a href="#"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/features">Features</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/faq">FAQs</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms & Conditions</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Newsletter</h4>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email" required />
+        <button type="submit"><i class="bi bi-send-fill"></i></button>
+      </form>
+      <p>Get the latest updates and learning tips straight to your inbox.</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 EduRadar. All rights reserved.</p>
+  </div>
+</footer>

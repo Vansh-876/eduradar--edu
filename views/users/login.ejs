@@ -1,0 +1,158 @@
+<% layout("/layouts/boilerplate") %>
+
+  <style>
+    .login-container {
+      min-height: 100vh;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 2rem;
+    }
+
+    .login-card {
+      display: flex;
+      flex-wrap: wrap;
+      background: #2b2b3c;
+      color: black;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+      max-width: 1100px;
+      width: 100%;
+      height: auto;
+      margin-top: 3rem;
+    }
+
+    .login-img-section {
+      flex: 1 1 45%;
+      background: url("/images/loginbg.jpg") center/cover no-repeat;
+      padding: 2rem;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      min-height: 400px;
+      text-align: center;
+    }
+
+    .login-img-section h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: black;
+    }
+
+    .login-form-section {
+      flex: 1 1 55%;
+      background: white;
+      padding: 3rem 2rem;
+    }
+
+    .login-form-section h3 {
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .form-control,
+    .btn {
+      border-radius: 10px;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      border: 1.5px solid #ccc;
+      box-shadow: none;
+      padding: 0.4rem 0.4rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #6c5ce7;
+      box-shadow: 0 0 0 0.15rem rgba(108, 92, 231, 0.25);
+      outline: none;
+    }
+
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .btn-primary {
+      background-color: #6c5ce7;
+      border-color: #6c5ce7;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background-color: #5a4bdc;
+    }
+
+    .custom-info-link {
+      color: #6c5ce7;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .custom-info-link:hover {
+      color: #5a4bdc;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .login-card {
+        flex-direction: column;
+        margin-top: 0.9rem !important;
+      }
+
+      .login-img-section {
+        min-height: 200px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .login-form-section {
+        padding: 2rem 1rem;
+      }
+
+      .login-img-section h2 {
+        font-size: 1.1rem;
+      }
+
+      .login-card {
+        margin-top: 2rem;
+        /* Add this for small devices */
+      }
+    }
+  </style>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-img-section">
+      </div>
+
+      <div class="login-form-section">
+        <h3>Login to EduRadar</h3>
+
+        <form action="/login" method="POST">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 mt-2">Login</button>
+        </form>
+
+        <div class="mt-4 text-center">
+          <small>Don't have an account? <a href="/register" class="custom-info-link">Register</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>

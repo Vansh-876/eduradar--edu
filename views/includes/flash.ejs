@@ -1,0 +1,62 @@
+<style>
+  .flash-container {
+    top: 100px !important;
+    width: 90%;
+    max-width: 400px;
+    pointer-events: none;
+  }
+
+  .flash-container .alert {
+    pointer-events: auto;
+    backdrop-filter: blur(8px);
+  }
+
+  .flash-container .alert-success {
+    background: rgba(25, 135, 84, 0.55);
+    /* soft emerald green */
+    color: white !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-left: 5px solid #198754;
+    border-radius: 0.75rem;
+  }
+
+  .flash-container .alert-danger {
+    background: rgba(220, 53, 69, 0.55);
+    /* soft tomato red */
+    color: white !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-left: 5px solid #dc3545;
+    border-radius: 0.75rem;
+  }
+</style>
+
+
+<div class="flash-container position-fixed start-50 translate-middle-x z-3" style="top: 100px;">
+  <% if (success && success.length> 0) { %>
+    <div class="alert alert-success alert-dismissible fade show shadow border-0" role="alert">
+      <strong>✅ Success:</strong>
+      <%= success %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <% } %>
+      <% if (error && error.length> 0) { %>
+        <div class="alert alert-danger alert-dismissible fade show shadow border-0" role="alert">
+          <strong>⚠️ Error:</strong>
+          <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <% } %>
+</div>
+
+<script>
+  setTimeout(() => {
+    const alerts = document.querySelectorAll('.alert, .toast');
+    alerts.forEach(alert => {
+      alert.classList.remove('show');
+      alert.classList.add('fade');
+      setTimeout(() => alert.remove(), 5000); // Clean DOM
+    });
+  }, 3000); // auto dismiss after 3s
+</script>

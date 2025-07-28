@@ -1,0 +1,183 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  .image-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 1rem;
+  min-height: 250px; /* ensures enough height for vertical centering */
+}
+  .form-control,
+    .btn {
+      border-radius: 10px;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      border: 1.5px solid #ccc;
+      box-shadow: none;
+      padding: 0.4rem 0.4rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #6c5ce7;
+      box-shadow: 0 0 0 0.15rem rgba(108, 92, 231, 0.25);
+      outline: none;
+    }
+
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+
+</style>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <div class="container py-5 mb-4 " style="font-family: 'Plus Jakarta Sans', sans-serif;">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+
+        <!-- Image Section -->
+        <div class="image-box">
+          <% if (listing.image && listing.image.url) { %>
+            <img src="<%= listing.image.url %>" alt="Listing Image" class="img-fluid rounded shadow-sm"
+              style="max-width: 90%; max-height: 400px;"
+              onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'fallback-text text-center\'><span>📦</span><br>No image available</div>';">
+            <% } else { %>
+              <div class="fallback-text text-muted text-center py-4 border rounded">📦<br>No image available</div>
+              <% } %>
+        </div>
+
+        <!-- Listing Details -->
+        <h2 class="fw-semibold text-left">
+          <%= listing.title %>
+        </h2>
+        <p class="text-muted text-left mb-2">
+          <%= listing.location %>
+        </p>
+        <p class="text-left">
+          <%= listing.description %>
+        </p>
+
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item"><strong>Business Name:</strong>
+            <%= listing.name %>
+          </li>
+          <li class="list-group-item"><strong>Category:</strong>
+            <%= listing.category %>
+          </li>
+          <li class="list-group-item"><strong>Opening Hours:</strong>
+            <%= listing.openHours %>
+          </li>
+          <li class="list-group-item"><strong>Contact:</strong>
+            <%= listing.contact %>
+          </li>
+          <% if (listing.alternateContact) { %>
+            <li class="list-group-item"><strong>Alternate Contact:</strong>
+              <%= listing.alternateContact %>
+            </li>
+            <% } %>
+              <% if (listing.whatsappNumber) { %>
+                <li class="list-group-item"><strong>WhatsApp:</strong>
+                  <%= listing.whatsappNumber %>
+                </li>
+                <% } %>
+                  <li class="list-group-item"><strong>Email:</strong>
+                    <%= listing.email %>
+                  </li>
+                  <% if (listing.website) { %>
+                    <li class="list-group-item"><strong>Website:</strong> <a href="<%= listing.website %>"
+                        target="_blank">
+                        <%= listing.website %>
+                      </a></li>
+                    <% } %>
+                      <% if (listing.googleMapLink) { %>
+                        <li class="list-group-item"><strong>Google Map:</strong> <a href="<%= listing.googleMapLink %>"
+                            target="_blank">View Location</a></li>
+                        <% } %>
+                          <% if (listing.facebookPage) { %>
+                            <li class="list-group-item"><strong>Facebook:</strong> <a href="<%= listing.facebookPage %>"
+                                target="_blank">
+                                <%= listing.facebookPage %>
+                              </a></li>
+                            <% } %>
+                              <% if (listing.instagramPage) { %>
+                                <li class="list-group-item"><strong>Instagram:</strong> <a
+                                    href="<%= listing.instagramPage %>" target="_blank">
+                                    <%= listing.instagramPage %>
+                                  </a></li>
+                                <% } %>
+        </ul>
+
+        <!-- Owner Actions -->
+        <% if (currentUser && currentUser.role.includes('vendor') && listing.owner &&
+          currentUser._id.toString()===listing.owner.toString()) { %>
+          <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-primary">Edit</a>
+          <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button class="btn btn-outline-danger">Delete</button>
+          </form>
+          <% } %>
+
+            <!-- Review Form -->
+            <hr>
+            <h4>Leave a Review</h4>
+            <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+              <div class="mb-3 mt-3">
+                <label for="rating" class="form-label">Rating</label>
+                <fieldset class="starability-slot">
+                  <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked />
+                  <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                  <label for="first-rate1" title="Terrible">1 star</label>
+                  <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                  <label for="first-rate2" title="Not good">2 stars</label>
+                  <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                  <label for="first-rate3" title="Average">3 stars</label>
+                  <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                  <label for="first-rate4" title="Very good">4 stars</label>
+                  <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                  <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
+              </div>
+
+              <div class="mb-3 mt-3">
+                <label for="comment">Comment</label>
+                <textarea class="form-control" name="review[comment]" rows="3" required></textarea>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please enter a comment.</div>
+              </div>
+
+              <button type="submit" class="btn btn-success mt-2">Submit Review</button>
+
+            </form>
+            <hr />
+            <% if(listing.reviews.length>0) { %>
+              <h5><strong>All Reviews</strong></h5>
+              <% for (let review of listing.reviews) { %>
+                <div class="card mb-3 mt-3">
+                  <div class="card-body">
+                    <h5 class="card-title">@<%= review.author.username %>
+                    </h5>
+                    <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
+                    <p class="card-text">
+                      <%= review.comment %>
+                    </p>
+                    <% if (currentUser && review.author && currentUser._id.toString()===review.author._id.toString()) {
+                      %>
+                      <form method="POST"
+                        action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                        <button class="btn btn-sm btn-dark">Delete</button>
+                      </form>
+                      <% } %>
+
+                  </div>
+                </div>
+                <% } %>
+                  <% } %>
+
+      </div>
+    </div>
+  </div>

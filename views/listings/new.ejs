@@ -1,0 +1,167 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  .form-control,
+    .btn {
+      border-radius: 10px;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      border: 1.5px solid #ccc;
+      box-shadow: none;
+      padding: 0.4rem 0.4rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #6c5ce7;
+      box-shadow: 0 0 0 0.15rem rgba(108, 92, 231, 0.25);
+      outline: none;
+    }
+
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+    .btn-primary {
+      background-color: #e6b631;
+      border-color: #e6b631;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background-color: #e0a800;
+    }
+
+</style>
+<body>
+<div class="container pt-5 mt-5 center py-5">
+  <h2 class="mb-4 fw-semibold text-center" style="font-family: 'Plus Jakarta Sans', sans-serif;">Add New Listing</h2>
+
+  <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+    
+    <!-- Business Title -->
+    <div class="mb-3">
+      <label class="form-label">Business Title</label>
+      <input type="text" class="form-control" name="listing[title]" placeholder="e.g. Elite Book House" required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter the business title.</div>
+    </div>
+
+    <!-- Business Name -->
+    <div class="mb-3">
+      <label class="form-label">Business Name</label>
+      <input type="text" class="form-control" name="listing[name]" placeholder="e.g. Elite Bookstore Pvt. Ltd." required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter the business name.</div>
+    </div>
+
+    <!-- Location -->
+    <div class="mb-3">
+      <label class="form-label">Location</label>
+      <input type="text" class="form-control" name="listing[location]" placeholder="e.g. Karol Bagh, Delhi" required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please provide the location.</div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" rows="3" name="listing[description]" placeholder="Brief description about your business..." required></textarea>
+      <div class="valid-feedback">Looks great!</div>
+      <div class="invalid-feedback">Please write a short description.</div>
+    </div>
+
+    <!-- Image Upload -->
+    <div class="mb-3">
+      <label class="form-label">Upload Image</label>
+      <input type="file" class="form-control" name="listing[image]" required>
+      <div class="valid-feedback">Image uploaded.</div>
+      <div class="invalid-feedback">Please upload an image.</div>
+    </div>
+
+    <!-- Category -->
+    <div class="mb-3">
+      <label class="form-label">Category</label>
+      <select class="form-select" name="listing[category]" required>
+        <option value="">Choose...</option>
+        <option>Stationery</option>
+        <option>Bookstore</option>
+        <option>Cyber Cafe</option>
+        <option>Library</option>
+        <option>Coaching Centre</option>
+      </select>
+      <div class="valid-feedback">Category selected.</div>
+      <div class="invalid-feedback">Please select a category.</div>
+    </div>
+
+    <!-- Tags -->
+    <div class="mb-3">
+      <label for="tags" class="form-label">Tags (comma separated)</label>
+      <input type="text" class="form-control" name="listing[tags]" placeholder="e.g. popular, budget friendly, verified">
+    </div>
+    
+    <div class="row">
+      <!-- Opening Hours -->
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Opening Hours</label>
+        <input type="text" class="form-control" name="listing[openHours]" placeholder="e.g. 9:00 AM – 9:00 PM" required>
+        <div class="valid-feedback">Good hours!</div>
+        <div class="invalid-feedback">Please mention the opening hours.</div>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Contact</label>
+        <input type="tel" class="form-control" name="listing[contact]" placeholder="e.g. +91 9876543210" required>
+        <div class="valid-feedback">Contact looks fine.</div>
+        <div class="invalid-feedback">Please provide a contact number.</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- WhatsApp Number -->
+      <div class="col-md-6 mb-3">
+        <label class="form-label">WhatsApp Number (Optional)</label>
+        <input type="tel" class="form-control" name="listing[whatsappNumber]" placeholder="e.g. +91 9876543210">
+      </div>
+
+      <!-- Email -->
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="listing[email]" placeholder="e.g. info@example.com" required>
+        <div class="invalid-feedback">Please enter a valid email address.</div>
+      </div>
+    </div>
+
+    <!-- Website -->
+    <div class="mb-3">
+      <label class="form-label">Website (Optional)</label>
+      <input type="url" class="form-control" name="listing[website]" placeholder="e.g. https://yourwebsite.com">
+    </div>
+
+    <!-- Google Map Link -->
+    <div class="mb-3">
+      <label class="form-label">Google Map Link (Optional)</label>
+      <input type="url" class="form-control" name="listing[googleMapLink]" placeholder="Paste your map location link">
+    </div>
+
+    <div class="row">
+      <!-- Facebook Page -->
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Facebook Page (Optional)</label>
+        <input type="url" class="form-control" name="listing[facebookPage]" placeholder="e.g. https://facebook.com/yourpage">
+      </div>
+
+      <!-- Instagram Page -->
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Instagram Page (Optional)</label>
+        <input type="url" class="form-control" name="listing[instagramPage]" placeholder="e.g. https://instagram.com/yourpage">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-warning btn-primary d-block mx-auto px-4 mt-4 mb-0">Submit</button>
+  </form>
+</div>
+</body>

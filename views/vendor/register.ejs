@@ -1,0 +1,161 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+ .login-container {
+  min-height: 100vh;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7rem 2rem 2rem; 
+}
+
+
+  .login-card {
+    display: flex;
+    flex-wrap: wrap;
+    background: #2b2b3c;
+    color: black;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 30px rgba(50, 119, 187, 0.3);
+    max-width: 1200px;
+    width: 100%;
+    height: auto;
+  }
+
+  .login-img-section {
+    flex: 1 1 45%;
+    background: url("/images/vendorbg.png") center/cover no-repeat;
+    padding: 2rem;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+  }
+
+  .login-img-section h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: black;
+  }
+
+  .login-form-section {
+    flex: 1 1 55%;
+    background:white;
+    padding: 3rem 2rem;
+  }
+
+  .login-form-section h3 {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .form-control,
+  .btn {
+    border-radius: 10px;
+  }
+
+  .btn-primary {
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    background-color: #5a4bdc;
+  }
+.btn-primary {
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    background-color: #5a4bdc;
+  }
+
+  .form-control {
+      border-radius: 10px;
+      border: 1.5px solid #ccc;
+      box-shadow: none;
+      padding: 0.4rem 0.4rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #6c5ce7;
+      box-shadow: 0 0 0 0.15rem rgba(108, 92, 231, 0.25);
+      outline: none;
+    }
+
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+.custom-info-link {
+      color: #6c5ce7;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .custom-info-link:hover {
+      color: #5a4bdc;
+      text-decoration: underline;
+    }
+  
+  @media (max-width: 768px) {
+    .login-card {
+      flex-direction: column;
+    }
+
+    .login-img-section {
+      min-height: 200px;
+    }
+  }
+</style>
+
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-img-section">
+    </div>
+
+    <div class="login-form-section">
+      <h3>Vendor Login</h3>
+  
+    <form action="/vendor/register" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label class="form-label">Business Name (Username)</label>
+        <input type="text" class="form-control rounded-3" name="username" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Business Email</label>
+        <input type="email" class="form-control rounded-3" name="email" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control rounded-3" name="password" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Upload Business Logo (Optional)</label>
+        <input type="file" name="profileImage" class="form-control rounded-3" accept="image/*">
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Register as Vendor</button>
+    </form>
+
+    <div class="mt-3 text-center">
+      <small>Already a Vendor? <a href="/vendor/login" class="custom-info-link">Login</a></small>
+    </div>
+    </div>
+  </div>
+</div>
+
+  
