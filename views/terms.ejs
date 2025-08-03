@@ -1,0 +1,198 @@
+<%- layout("layouts/boilerplate") %>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+    }
+
+    .hero {
+      background: url('/images/privacybg.jpg') no-repeat center center/cover;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      margin-top: 100px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 5px;
+    }
+
+    .hero p {
+      font-size: 14px;
+      color: #ddd;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background-color: #fff;
+      padding: 10px;
+      gap: 30px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .tabs a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .tabs a.active::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #2196f3;
+      left: 0;
+      bottom: -5px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .content {
+      flex: 3;
+      padding-right: 40px;
+    }
+
+    .content h2 {
+      font-size: 22px;
+      color: #222;
+    }
+
+    .content p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.7;
+    }
+
+    .sidebar {
+      flex: 1;
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .sidebar ul li a:hover, .sidebar ul li a.active {
+      color: #2196f3;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .content {
+        padding-right: 0;
+      }
+
+      .sidebar {
+        position: relative;
+        top: unset;
+        margin-top: 40px;
+      }
+
+      .tabs {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="hero">
+    <h1>Privacy Policy</h1>
+    <p>Last updated August 01, 2025</p>
+  </div>
+
+  <!-- Tabs -->
+<div class="tabs">
+  <a href="/terms" class="<%= page === 'terms' ? 'active' : '' %>">Terms</a>
+  <a href="/privacy" class="<%= page === 'privacy' ? 'active' : '' %>">Privacy Policy</a>
+  <a href="/copyright" class="<%= page === 'copyright' ? 'active' : '' %>">Copyright Policy</a>
+</div>
+
+
+<div class="container">
+
+<!-- Main Content -->
+<div class="content">
+  <section id="acceptance">
+    <h2>Acceptance of Terms</h2>
+    <p>By accessing or using EduRadar, you agree to be bound by these Terms.</p>
+  </section>
+
+  <section id="modification">
+    <h2>Modification of Terms</h2>
+    <p>EduRadar reserves the right to change these Terms at any time without notice.</p>
+  </section>
+
+  <section id="userresponsibility">
+    <h2>User Responsibilities</h2>
+    <p>Users must use the platform responsibly, adhering to applicable laws and regulations.</p>
+  </section>
+
+  <section id="limitations">
+    <h2>Limitations of Liability</h2>
+    <p>EduRadar is not liable for any indirect or consequential damages arising from use.</p>
+  </section>
+
+  <section id="termination">
+    <h2>Termination</h2>
+    <p>We may terminate or suspend your access for violations or suspected misconduct.</p>
+  </section>
+
+  <section id="governinglaw">
+    <h2>Governing Law</h2>
+    <p>These Terms are governed by Indian law and jurisdiction.</p>
+  </section>
+</div>
+
+
+ <!-- Sidebar -->
+<div class="sidebar">
+  <ul>
+    <li><a href="#acceptance">Acceptance of Terms</a></li>
+    <li><a href="#modification">Modification of Terms</a></li>
+    <li><a href="#userresponsibility">User Responsibilities</a></li>
+    <li><a href="#limitations">Limitations of Liability</a></li>
+    <li><a href="#termination">Termination</a></li>
+    <li><a href="#governinglaw">Governing Law</a></li>
+  </ul>
+</div>
+</div>
+
+ 
+
+<script>
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
+</script>

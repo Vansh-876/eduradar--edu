@@ -1,60 +1,100 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="container-fluid p-4 mt-5 pt-5 mb-4">
-  <div class="row">
-    <!-- Sidebar -->
-    <div class="col-md-3 mb-3">
-      <div class="card shadow-sm rounded-4">
-        <div class="card-body">
-          <div class="text-center mb-3">
-            <img src="<%= currentUser.profileImage ? currentUser.profileImage.url : '/images/default-profile.jpg' %>" class="rounded-circle" width="80" height="80" alt="Profile">
-            <h5 class="mt-2"><%= currentUser.username %></h5>
-            <small class="text-muted"><%= currentUser.email %></small>
+<style>
+  .dashboard-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  }
+
+  .card-header {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #333;
+  }
+
+  .stat-box {
+    background: #f5f7fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+
+  .stat-box:hover {
+    background: #e8f0fe;
+  }
+
+  .stat-title {
+    font-size: 1rem;
+    color: #666;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2a73e8;
+  }
+
+  .activity-log li {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .activity-log li:last-child {
+    border-bottom: none;
+  }
+
+  @media (max-width: 768px) {
+    .stat-box {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+
+<div class="container py-5" style="margin-top: 90px;">
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="dashboard-card p-4">
+        <div class="card-header mb-3">Welcome, <%= currentUser.username %> 👋</div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="stat-box">
+              <div class="stat-title">Saved Listings</div>
+              <div class="stat-value"><%= currentUser.savedListings ? currentUser.savedListings.length : 0 %></div>
+            </div>
           </div>
-          <ul class="list-group list-group-flush">
-            <a href="/dashboard" class="list-group-item list-group-item-action">🏠 Overview</a>
-            <a href="/profile/settings" class="list-group-item list-group-item-action">👤 My Profile</a>
-            <a href="/saved-items" class="list-group-item list-group-item-action">🔖 Saved Items</a>
-            <a href="/notifications" class="list-group-item list-group-item-action">🔔 Notifications</a>
-            <a href="/change-password" class="list-group-item list-group-item-action">🔒 Change Password</a>
-            <a href="/logout" class="list-group-item list-group-item-action text-danger">🚪 Logout</a>
-          </ul>
+          <div class="col-md-4">
+            <div class="stat-box">
+              <div class="stat-title">Notifications</div>
+              <div class="stat-value">3</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="stat-box">
+              <div class="stat-title">Recent Activities</div>
+              <div class="stat-value">5</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Main Content -->
-    <div class="col-md-9">
-      <div class="card shadow-sm rounded-4 mb-3 p-4">
-        <h4 class="mb-3">📊 Welcome to Your Dashboard</h4>
-        <div class="row text-center">
-          <div class="col-md-4">
-            <div class="p-3 rounded-3 shadow-sm bg-light">
-              <h5>Saved Listings</h5>
-              <h2><%= currentUser.savedListings ? currentUser.savedListings.length : 0 %></h2>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="p-3 rounded-3 shadow-sm bg-light">
-              <h5>Notifications</h5>
-              <h2>3</h2>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="p-3 rounded-3 shadow-sm bg-light">
-              <h5>Recent Activity</h5>
-              <h2>5</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card shadow-sm rounded-4 p-4">
-        <h5>📅 Recent Activities</h5>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">You saved a listing - <small class="text-muted">2 days ago</small></li>
-          <li class="list-group-item">You updated your profile - <small class="text-muted">4 days ago</small></li>
-          <li class="list-group-item">You changed your password - <small class="text-muted">1 week ago</small></li>
+  <div class="row">
+    <div class="col-12">
+      <div class="dashboard-card p-4">
+        <div class="card-header mb-3">Recent Activities</div>
+        <ul class="list-unstyled activity-log">
+          <li>You saved a listing <small class="text-muted">· 2 days ago</small></li>
+          <li>You updated your profile <small class="text-muted">· 4 days ago</small></li>
+          <li>You changed your password <small class="text-muted">· 1 week ago</small></li>
         </ul>
       </div>
     </div>

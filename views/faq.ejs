@@ -1,0 +1,86 @@
+<% layout('layouts/boilerplate') %>
+
+
+<style>
+  .faq-section {
+    padding: 60px 20px;
+    margin-top: 100px;
+  }
+
+  .faq-section h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: bold;
+  }
+
+  .faq-box {
+    background-color: rgb(236, 242, 249);
+    border-left: 5px solid #003e29;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    transition: 0.3s;
+  }
+
+  .faq-box:hover {
+    transform: translateY(-2px);
+  }
+
+  .faq-question {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .faq-answer {
+    margin-top: 10px;
+    color: #555;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .faq-section h2 {
+      font-size: 2rem;
+    }
+
+    .faq-box {
+      padding: 15px;
+    }
+  }
+</style>
+
+<div class="faq-section">
+  <div class="text-center mb-5">
+    <h1 class="display-4 fw-bold">Frequently Asked<span class="text-primary">Questions</span></h1>
+    <p class="lead text-muted"> Find quick answers to common questions about our platform, features, and how to get started with ease.</p>
+  </div>
+
+  <div class="container">
+    <div class="faq-box">
+      <div class="faq-question">Q1: What is EduRadar?</div>
+      <div class="faq-answer">EduRadar is a platform that connects students with top educational resources, institutes, and guidance for their academic and career goals.</div>
+    </div>
+
+    <div class="faq-box">
+      <div class="faq-question">Q2: How can I list my institute on EduRadar?</div>
+      <div class="faq-answer">You can list your institute by signing up as a vendor and submitting your details through the dashboard panel.</div>
+    </div>
+
+    <div class="faq-box">
+      <div class="faq-question">Q3: Is EduRadar free to use?</div>
+      <div class="faq-answer">Yes, EduRadar is free for students. Listing packages for vendors may vary based on visibility and features.</div>
+    </div>
+
+    <div class="faq-box">
+      <div class="faq-question">Q4: How is data privacy maintained?</div>
+      <div class="faq-answer">We follow strict data security protocols and never share your personal data with third parties without consent.</div>
+    </div>
+
+    <div class="faq-box">
+      <div class="faq-question">Q5: Can I contact institutes directly from EduRadar?</div>
+      <div class="faq-answer">Yes, each listing provides contact details and enquiry forms to connect directly with the institution.</div>
+    </div>
+  </div>
+</div>

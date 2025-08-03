@@ -3,29 +3,55 @@ const Joi = require('joi');
 const listingSchema = Joi.object({
   listing: Joi.object({
 
-      title: Joi.string().required().messages({
+    title: Joi.string().required().messages({
       'string.empty': 'Title is required'
     }),
+
     name: Joi.string().min(3).required().messages({
       'string.empty': 'Name is required',
       'string.min': 'Name must be at least 3 characters long'
     }),
+
     location: Joi.string().required().messages({
       'string.empty': 'Location is required',
     }),
 
-    category: Joi.string().valid('Bookstore', 'Library', 'Stationery', 'Cyber Cafe', 'Coaching').required(),
+    category: Joi.string().valid(
+      'Bookstore',
+      'Library',
+      'Stationery',
+      'Cyber Cafe',
+      'Coaching',
+      'institution'
+    ).required(),
 
+  subcategory: Joi.alternatives().conditional('category', {
+  is: 'institution',
+  then: Joi.string().valid('school', 'college', 'university').required(),
+  otherwise: Joi.forbidden()
+}),
+
+      board: Joi.string().optional().allow(""),
+    classes_from: Joi.string().optional().allow(""),
+    classes_to: Joi.string().optional().allow(""),
+    affiliation: Joi.string().optional().allow(""),
+    courses_offered: Joi.alternatives().try(
+    Joi.string().allow("",null),
+    Joi.array().items(Joi.string()).allow(null)
+    ).optional(),
     openHours: Joi.string().required().messages({
       'string.empty': 'Open hours are required',
     }),
+
     description: Joi.string().required().messages({
       'string.empty': 'Description is required',
     }),
+
     contact: Joi.string().pattern(/^[0-9]{10}$/).optional().messages({
       'string.pattern.base': 'Phone number must be 10 digits'
     }),
-      alternateContact: Joi.string().pattern(/^[0-9]{10}$/).allow('', null).messages({
+
+    alternateContact: Joi.string().pattern(/^[0-9]{10}$/).allow('', null).messages({
       'string.pattern.base': 'Alternate contact must be a valid 10-digit number',
     }),
 
@@ -53,16 +79,20 @@ const listingSchema = Joi.object({
     instagramPage: Joi.string().uri().allow('', null).messages({
       'string.uri': 'Instagram page must be a valid URL',
     }),
+
     image: Joi.string().allow('', null),
-      tags: Joi.alternatives().try(
+
+    tags: Joi.alternatives().try(
       Joi.array().items(Joi.string()),
-      Joi.string()  
+      Joi.string()
     ).optional()
-  }).required()
+
+  }).required(),
 });
 
 module.exports = { listingSchema };
 
+// Review Schema (unchanged)
 module.exports.reviewSchema = Joi.object({
   review: Joi.object({
     rating: Joi.number().min(1).max(5).required().messages({

@@ -1,0 +1,85 @@
+<% layout('layouts/boilerplate') %>
+
+<style>
+  .about-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .display-4 {
+      font-size: 2rem;
+    }
+    .about-icon {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<div class="container my-5">
+  <!-- Hero Section -->
+  <div class="text-center mb-5 pt-5">
+    <h1 class="display-4 fw-bold">About <span class="text-primary">EduRadar</span></h1>
+    <p class="lead text-muted">Empowering learners with the right educational resources at the right time.</p>
+  </div>
+
+  <!-- Mission and Vision -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 mb-4 mb-md-0">
+      <img src="images/about.jpg" class="img-fluid rounded-circle shadow" alt="Mission Image">
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-semibold">Our Mission</h2>
+      <p class="text-muted">
+        At EduRadar, our mission is to simplify and revolutionize how students discover coaching institutes, books,
+        and learning spaces. We strive to provide clarity and direction through detailed listings, verified reviews,
+        and real-time recommendations.
+      </p>
+      <h2 class="fw-semibold mt-4">Our Vision</h2>
+      <p class="text-muted">
+        To become the one-stop destination for every learner’s journey by connecting them with the best academic
+        services and communities around them.
+      </p>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="text-center mb-5">
+    <h2 class="mb-4 fw-semibold">Why Choose EduRadar?</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm rounded-4 p-3">
+          <div class="card-body">
+            <i class="bi bi-search about-icon text-primary"></i>
+            <h5 class="card-title fw-bold">Smart Discovery</h5>
+            <p class="card-text text-muted">Search nearby educational resources using powerful filters and accurate geolocation.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm rounded-4 p-3">
+          <div class="card-body">
+            <i class="bi bi-star-half about-icon text-warning"></i>
+            <h5 class="card-title fw-bold">Real Reviews</h5>
+            <p class="card-text text-muted">Make informed choices with honest student reviews, ratings, and shared experiences.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm rounded-4 p-3">
+          <div class="card-body">
+            <i class="bi bi-lightning about-icon text-success"></i>
+            <h5 class="card-title fw-bold">Fast & Reliable</h5>
+            <p class="card-text text-muted">Optimized performance ensures you get real-time, accurate educational information.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="bg-light rounded-4 p-5 text-center shadow-sm">
+    <h3 class="mb-3 fw-semibold">Ready to explore your educational opportunities?</h3>
+    <a href="/listings" class="btn btn-primary btn-lg px-4 py-2">Explore Listings</a>
+  </div>
+</div>

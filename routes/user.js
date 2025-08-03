@@ -6,6 +6,7 @@ const wrapAsync = require("../utils/wrapAsync");
 const { storeReturnTo ,isLoggedIn, isVendor } = require("../middleware.js");
 const userController = require("../controllers/user.js");
 const upload = require('../multer');
+const Listing = require("../models/listing");
 
 // Show SignUp form
 router.route("/register")
@@ -26,7 +27,7 @@ router.route("/profile/settings")
   .post(isLoggedIn, upload.single('profileImage'), userController.updateProfile);
 
   router
-  .route('/profile/change-password')
+  .route('/changePassword')
   .get(isLoggedIn, userController.renderChangePasswordForm)
   .post(isLoggedIn, userController.changePassword);
 

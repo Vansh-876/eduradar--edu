@@ -1,54 +1,252 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="container my-5 mt-5 pt-5 mb-5">
-  <h2 class="mb-4 fw-bold text-center">Vendor Dashboard</h2>
+<style>
+  body {
+    background: #f9fbfc;
+    font-family: 'Inter', sans-serif;
+    color: #1e2e2d;
+  }
 
-  <div class="row g-4">
-    <!-- Profile Card -->
-    <div class="col-md-4">
-      <div class="card shadow rounded-4 text-center p-3">
-        <img src="<%= user.profileImage?.url || '/images/default-profile.jpg' %>" alt="Vendor" class="rounded-circle mx-auto" width="100" height="100">
-        <h5 class="mt-3"><%= user.username %></h5>
-        <p class="text-muted"><%= user.email %></p>
-        <a href="/profile/settings" class="btn btn-outline-primary btn-sm mt-2">Edit Profile</a>
-      </div>
+  .vendor-dashboard {
+    max-width: 1300px;
+    margin: auto;
+    padding: 40px 20px;
+  }
+
+  .greeting-section {
+    background: linear-gradient(135deg, #003e29, #467061);
+    color: white;
+    margin-top: 60px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .greeting-section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .scroll-section {
+    overflow-x: auto;
+    display: flex;
+    gap: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+  }
+
+  .scroll-section::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .scroll-section::-webkit-scrollbar-thumb {
+    background-color: #b8d5c4;
+    border-radius: 10px;
+  }
+
+  .scroll-card {
+    min-width: 220px;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+    flex-shrink: 0;
+    text-align: center;
+    transition: 0.3s ease;
+  }
+
+  .scroll-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .scroll-card h5 {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .scroll-card .number {
+    font-size: 1.8rem;
+    color: #003e29;
+    font-weight: bold;
+  }
+
+  .tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+
+  .tile-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 8px 25px rgba(0, 62, 41, 0.06);
+    transition: 0.3s;
+    text-align: left;
+    position: relative;
+  }
+
+  .tile-card:hover {
+    transform: scale(1.015);
+    box-shadow: 0 10px 30px rgba(0, 62, 41, 0.12);
+  }
+
+  .tile-card h6 {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #003e29;
+  }
+
+  .tile-card p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 8px 0 15px;
+  }
+
+  .tile-card .btn {
+    font-size: 0.85rem;
+    padding: 6px 14px;
+  }
+
+  .listing-preview {
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .listing-preview h4 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #003e29;
+  }
+
+  .listing-preview .listing-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .listing-item:last-child {
+    border-bottom: none;
+  }
+
+  .listing-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .listing-info h5 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #003e29;
+  }
+
+  .listing-info small {
+    color: #666;
+  }
+
+  @media(max-width: 768px) {
+    .greeting-section {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .tiles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .scroll-section {
+      padding-left: 5px;
+    }
+  }
+</style>
+
+<div class="vendor-dashboard">
+
+  <!-- Greeting Section -->
+  <div class="greeting-section">
+    <div>
+      <h2>Welcome, <%= user.username %> 👋</h2>
+      <p class="mt-2">Manage your services, see analytics & grow smarter.</p>
+    </div>
+    <div>
+      <a href="/profile/settings" class="btn btn-light btn-sm">Edit Profile</a>
+    </div>
+  </div>
+
+  <!-- Horizontal Scroll Stats -->
+  <div class="scroll-section">
+    <div class="scroll-card">
+      <h5>Total Listings</h5>
+      <div class="number">12</div>
+    </div>
+    <div class="scroll-card">
+      <h5>Bookings</h5>
+      <div class="number">47</div>
+    </div>
+    <div class="scroll-card">
+      <h5>Avg. Rating</h5>
+      <div class="number">4.8★</div>
+    </div>
+    <div class="scroll-card">
+      <h5>Pending Reviews</h5>
+      <div class="number">5</div>
+    </div>
+    <div class="scroll-card">
+      <h5>Monthly Visitors</h5>
+      <div class="number">1.2k</div>
+    </div>
+  </div>
+
+  <!-- Explore Tiles -->
+  <div class="tiles-grid">
+    <div class="tile-card">
+      <h6>Add New Listing</h6>
+      <p>Post your coaching or education-related service.</p>
+      <a href="/listings/new" class="btn btn-success btn-sm">Add Now</a>
+    </div>
+    <div class="tile-card">
+      <h6>Check Notifications</h6>
+      <p>Bookings, reviews, alerts & system messages.</p>
+      <a href="/notifications" class="btn btn-warning btn-sm">View</a>
     </div>
 
-    <!-- Quick Actions -->
-    <div class="col-md-8">
-      <div class="row g-3">
-        <div class="col-md-6">
-          <div class="card shadow p-3 rounded-4 text-center h-100">
-            <h6 class="fw-bold"> Add New Listing</h6>
-            <p class="text-muted small">Add your business or service for students</p>
-            <a href="/listings/new" class="btn btn-success btn-sm">Add Listing</a>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="card shadow p-3 rounded-4 text-center h-100">
-            <h6 class="fw-bold"> My Listings</h6>
-            <p class="text-muted small">View, edit or remove your listings</p>
-            <a href="/vendor/my-listings" class="btn btn-primary btn-sm">View Listings</a>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="card shadow p-3 rounded-4 text-center h-100">
-            <h6 class="fw-bold">Notifications</h6>
-            <p class="text-muted small">See new bookings or updates</p>
-            <a href="/notifications" class="btn btn-warning btn-sm">View Notifications</a>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="card shadow p-3 rounded-4 text-center h-100">
-            <h6 class="fw-bold">Settings</h6>
-            <p class="text-muted small">Manage your profile & password</p>
-            <a href="/profile/settings" class="btn btn-secondary btn-sm">Go to Settings</a>
-          </div>
-        </div>
-      </div>
+    <div class="tile-card">
+      <h6>Account Settings</h6>
+      <p>Update profile info, change password, etc.</p>
+      <a href="/profile/settings" class="btn btn-secondary btn-sm">Open</a>
     </div>
+  </div>
+
+  <!-- Latest Listings Preview -->
+  <div class="listing-preview mt-5">
+    <h4>My Recent Listings</h4>
+    <% listings.slice(0, 3).forEach(listing => { %>
+      <div class="listing-item">
+        <img src="<%= listing.image.url %>" alt="listing">
+        <div class="listing-info">
+          <h5><%= listing.title %></h5>
+          <small><%= listing.location %> • <%= listing.category %></small>
+        </div>
+         <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning">Edit</a>
+            <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+      <button class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+    </form>
+      </div>
+    <% }) %>
   </div>
 </div>

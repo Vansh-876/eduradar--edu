@@ -4,6 +4,7 @@ const passport = require('passport');
 const wrapAsync = require('../utils/wrapAsync');
 const { isVendor } = require('../middleware');
 const upload = require('../multer');
+const Listing = require("../models/listing.js");
 const userController = require('../controllers/user');
 
 // ✅ Vendor Register Routes (Single declaration)
@@ -22,10 +23,23 @@ router.route('/vendor/login')
 // ✅ Vendor Logout
 router.get('/vendor/logout', userController.vendorLogout);
 
-// ✅ Vendor Dashboard (Protected)
-router.get('/vendor/dashboard', isVendor, (req, res) => {
-  res.render('vendor/dashboard', { user: req.user });
-});
+router.get('/vendor/dashboard', isVendor, async (req, res) => {
+  try {
+    const vendorId = req.user._id;
 
+    // Fetch listings of the logged-in vendor
+    const vendorListings = await Listing.find({ owner: vendorId });
+
+    res.render("vendor/dashboard", {
+      user: req.user,
+      listings: vendorListings
+    });
+
+  } catch (err) {
+    console.error("Dashboard render error:", err);
+    req.flash("error", "Something went wrong loading your dashboard.");
+    res.redirect("/vendor/login");
+  }
+});
 
 module.exports = router;

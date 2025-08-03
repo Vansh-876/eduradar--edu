@@ -81,20 +81,68 @@
       <div class="invalid-feedback">Please upload an image.</div>
     </div>
 
-    <!-- Category -->
+
+<!-- Category -->
+<div class="mb-3">
+  <label class="form-label">Category</label>
+  <select class="form-select" name="listing[category]" id="category-select" required>
+    <option value="">Choose...</option>
+    <option>Stationery</option>
+    <option>Bookstore</option>
+    <option>Cyber Cafe</option>
+    <option>Library</option>
+    <option>Coaching Centre</option>
+    <option value="institution">Institution</option>
+  </select>
+  <div class="valid-feedback">Category selected.</div>
+  <div class="invalid-feedback">Please select a category.</div>
+</div>
+
+<!-- Subcategory for Institution -->
+<div class="mb-3 d-none" id="subcategory-container">
+  <label class="form-label">Subcategory (Only for Institutions)</label>
+  <select class="form-select" name="listing[subcategory]" id="subcategory-select">
+    <option value="">Select Subcategory</option>
+    <option value="school">School</option>
+    <option value="college">College</option>
+    <option value="university">University</option>
+  </select>
+</div>
+
+<!-- Institution-specific fields -->
+<div id="institution-fields" class="d-none">
+  <!-- For School -->
+  <div class="school-only d-none">
     <div class="mb-3">
-      <label class="form-label">Category</label>
-      <select class="form-select" name="listing[category]" required>
-        <option value="">Choose...</option>
-        <option>Stationery</option>
-        <option>Bookstore</option>
-        <option>Cyber Cafe</option>
-        <option>Library</option>
-        <option>Coaching Centre</option>
-      </select>
-      <div class="valid-feedback">Category selected.</div>
-      <div class="invalid-feedback">Please select a category.</div>
+      <label class="form-label">Board</label>
+      <input type="text" class="form-control" name="listing[board]" placeholder="e.g. CBSE, ICSE">
     </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Classes From</label>
+        <input type="text" class="form-control" name="listing[classes_from]" placeholder="e.g. Nursery">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Classes To</label>
+        <input type="text" class="form-control" name="listing[classes_to]" placeholder="e.g. 12th">
+      </div>
+    </div>
+  </div>
+
+  <!-- For College/University -->
+  <div class="college-university-only d-none">
+    <div class="mb-3">
+      <label class="form-label">Affiliation</label>
+      <input type="text" class="form-control" name="listing[affiliation]" placeholder="e.g. Delhi University, AKTU">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Courses Offered (comma separated)</label>
+      <input type="text" class="form-control" name="listing[courses_offered]" placeholder="e.g. B.Tech, M.Com, MBA">
+    </div>
+  </div>
+</div>
+
+
 
     <!-- Tags -->
     <div class="mb-3">
@@ -164,4 +212,39 @@
     <button type="submit" class="btn btn-warning btn-primary d-block mx-auto px-4 mt-4 mb-0">Submit</button>
   </form>
 </div>
+
+<script>
+  const categorySelect = document.getElementById("category-select");
+  const subcategoryContainer = document.getElementById("subcategory-container");
+  const subcategorySelect = document.getElementById("subcategory-select");
+  const institutionFields = document.getElementById("institution-fields");
+  const schoolFields = document.querySelector(".school-only");
+  const collegeUniFields = document.querySelector(".college-university-only");
+
+  categorySelect.addEventListener("change", function () {
+    if (this.value === "institution") {
+      subcategoryContainer.classList.remove("d-none");
+    } else {
+      subcategoryContainer.classList.add("d-none");
+      institutionFields.classList.add("d-none");
+      schoolFields.classList.add("d-none");
+      collegeUniFields.classList.add("d-none");
+    }
+  });
+
+  subcategorySelect.addEventListener("change", function () {
+    institutionFields.classList.remove("d-none");
+
+    // Reset all
+    schoolFields.classList.add("d-none");
+    collegeUniFields.classList.add("d-none");
+
+    if (this.value === "school") {
+      schoolFields.classList.remove("d-none");
+    } else if (this.value === "college" || this.value === "university") {
+      collegeUniFields.classList.remove("d-none");
+    }
+  });
+</script>
+
 </body>

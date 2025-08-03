@@ -1,0 +1,193 @@
+<%- layout("layouts/boilerplate") %>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f6f9;
+  }
+
+  .hero {
+    background: url('/images/privacybg.jpg') no-repeat center center/cover;
+    color: white;
+    margin-top: 100px;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    margin-bottom: 5px;
+  }
+
+  .hero p {
+    font-size: 14px;
+    color: #ddd;
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding: 10px;
+    gap: 30px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .tabs a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    position: relative;
+  }
+
+  .tabs a.active::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #2196f3;
+    left: 0;
+    bottom: -5px;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  .content {
+    flex: 3;
+    padding-right: 40px;
+  }
+
+  .content h2 {
+    font-size: 22px;
+    color: #222;
+  }
+
+  .content p {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.7;
+  }
+
+  .sidebar {
+    flex: 1;
+    position: sticky;
+    top: 100px;
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar ul li {
+    margin-bottom: 10px;
+  }
+
+  .sidebar ul li a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .sidebar ul li a:hover, .sidebar ul li a.active {
+    color: #2196f3;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+
+    .content {
+      padding-right: 0;
+    }
+
+    .sidebar {
+      position: relative;
+      top: unset;
+      margin-top: 40px;
+    }
+
+    .tabs {
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+  }
+</style>
+
+<!-- Header -->
+<div class="hero">
+  <h1>Copyright Policy</h1>
+  <p>Last updated August 01, 2025</p>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <a href="/terms" class="<%= page === 'terms' ? 'active' : '' %>">Terms</a>
+  <a href="/privacy" class="<%= page === 'privacy' ? 'active' : '' %>">Privacy Policy</a>
+  <a href="/copyright" class="<%= page === 'copyright' ? 'active' : '' %>">Copyright Policy</a>
+</div>
+
+<div class="container">
+
+<!-- Main Content -->
+<div class="main-content">
+  <section id="ownership">
+    <h2>Content Ownership</h2>
+    <p>All content on EduRadar is either owned by us or properly licensed by third parties.</p>
+  </section>
+
+  <section id="reporting">
+    <h2>Reporting Infringement</h2>
+    <p>To report a copyright violation, please email us at copyright@eduradar.com.</p>
+  </section>
+
+  <section id="removal">
+    <h2>Content Removal Process</h2>
+    <p>Reported content will be reviewed and removed upon verification of the claim.</p>
+  </section>
+
+  <section id="repeat">
+    <h2>Repeat Infringers</h2>
+    <p>Accounts repeatedly violating copyright will be suspended or terminated.</p>
+  </section>
+
+  <section id="permissions">
+    <h2>Permissions and Licensing</h2>
+    <p>To use EduRadar content for commercial purposes, written permission is required.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Information</h2>
+    <p>For copyright-related issues, contact us at legal@eduradar.com.</p>
+  </section>
+</div>
+
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <ul>
+    <li><a href="#ownership">Content Ownership</a></li>
+    <li><a href="#reporting">Reporting Infringement</a></li>
+    <li><a href="#removal">Content Removal Process</a></li>
+    <li><a href="#repeat">Repeat Infringers</a></li>
+    <li><a href="#permissions">Permissions and Licensing</a></li>
+    <li><a href="#contact">Contact Information</a></li>
+  </ul>
+</div>
+</div>
+
+<script>
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
+</script>

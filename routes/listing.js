@@ -9,16 +9,26 @@ const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
 
 
-// ✅ Route for listing index + create listing
 router.route("/listings")
   .get(wrapAsync(listingController.index))
   .post(
     isLoggedIn,
     isVendor,
     upload.single('listing[image]'),
-    validateListing,
+
+    // ✅ Debug middleware
+    (req, res, next) => {
+      console.log("REQ.BODY:", req.body);
+      console.log("🟡 Category received from form:", `"${req.body.listing.category}"`);
+      // Optional: Clean the value
+      req.body.listing.category = req.body.listing.category.trim();
+      next();
+    },
+
+    validateListing, // schema validation yahan hoti hai
     wrapAsync(listingController.createListing)
   );
+
 
 // ✅ New Listing Form
 router.get("/listings/new", isLoggedIn,isVendor, wrapAsync(listingController.renderNewForm));
@@ -31,6 +41,10 @@ router.route("/listings/:id")
     isListingOwner,
     isVendor,
     upload.single('listing[image]'),
+    (req, res, next) => {
+    console.log("▶️ Before validateListing — req.body:", req.body);
+    next();
+  },
     validateListing,
     wrapAsync(listingController.updateListing)
   )

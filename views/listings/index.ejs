@@ -74,35 +74,39 @@
     }
   </style>
 
-  <div class="filters">
-    <a href="/listings" class="filter">
-      <div><i class="fa-solid fa-globe"></i></div>
-      <p>All</p>
-    </a>
-    <a href="/listings?category=Coaching" class="filter">
-      <div><i class="fa-solid fa-chalkboard-user"></i></div>
-      <p>Coaching</p>
-    </a>
-    <a href="/listings?category=Cyber Cafe" class="filter">
-      <div><i class="fa-solid fa-computer"></i></div>
-      <p>Cyber Cafe</p>
-    </a>
-    <a href="/listings?category=Library" class="filter">
-      <div><i class="fa-solid fa-book-open"></i></div>
-      <p>Library</p>
-    </a>
-    <a href="/listings?category=Stationery" class="filter">
-      <div><i class="fa-solid fa-pencil-ruler"></i></div>
-      <p>Stationery</p>
-    </a>
-    <a href="/listings?category=Bookstore" class="filter">
-      <div><i class="fa-solid fa-book"></i></div>
-      <p>Bookstore</p>
-    </a>
-  </div>
+<div class="filters">
+  <a href="/listings" class="filter">
+    <div><i class="fa-solid fa-globe"></i></div>
+    <p>All</p>
+  </a>
+  <a href="/listings?category=Coaching" class="filter">
+    <div><i class="fa-solid fa-chalkboard-user"></i></div>
+    <p>Coaching</p>
+  </a>
+  <a href="/listings?category=Cyber Cafe" class="filter">
+    <div><i class="fa-solid fa-computer"></i></div>
+    <p>Cyber Cafe</p>
+  </a>
+  <a href="/listings?category=Library" class="filter">
+    <div><i class="fa-solid fa-book-open"></i></div>
+    <p>Library</p>
+  </a>
+  <a href="/listings?category=Stationery" class="filter">
+    <div><i class="fa-solid fa-pencil-ruler"></i></div>
+    <p>Stationery</p>
+  </a>
+  <a href="/listings?category=Bookstore" class="filter">
+    <div><i class="fa-solid fa-book"></i></div>
+    <p>Bookstore</p>
+  </a>
+  <a href="/listings?category=institution" class="filter">
+    <div><i class="fa-solid fa-school"></i></div>
+    <p>Institution</p>
+  </a>
+</div>
 
 
-  <div class="container px-3 listings-container">
+  <div class="container-fluid px-3 listings-container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
       <% allListings.forEach(listing=> { %>
         <div class="col">

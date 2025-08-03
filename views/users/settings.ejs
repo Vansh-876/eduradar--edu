@@ -1,63 +1,93 @@
 <% layout("/layouts/boilerplate") %>
+
 <style>
-    .form-control,
-    .btn {
-      border-radius: 10px;
-    }
+  .profile-card {
+    max-width: 500px;
+    margin: auto;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    background: #fff;
+  }
 
-    .form-control {
-      border-radius: 10px;
-      border: 1.5px solid #ccc;
-      box-shadow: none;
-      padding: 0.4rem 0.4rem;
-      font-size: 1rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
+  .profile-card h3 {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
 
-    .form-control:focus {
-      border-color: #6c5ce7;
-      box-shadow: 0 0 0 0.15rem rgba(108, 92, 231, 0.25);
-      outline: none;
-    }
+  .form-label {
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    color: #555;
+  }
 
-    .form-label {
-      font-weight: 500;
-      margin-bottom: 0.3rem;
-    }
+  .form-control {
+    border-radius: 0.5rem;
+    border: 1.5px solid #ccc;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+  }
 
-  </style>
+  .form-control:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 0 0.2rem rgba(108, 92, 231, 0.2);
+  }
 
-<div class="container mt-5 pt-5 mb-4">
-  <h3 class="text-center fw-semibold mb-4">⚙️ Profile Settings</h3>
+  .profile-pic {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #6c5ce7;
+    margin-bottom: 1rem;
+  }
 
-  <form action="/profile/settings" method="POST" enctype="multipart/form-data" class="card p-4 shadow-sm rounded-4 mx-auto" style="max-width: 500px;">
-    
-    <!-- Profile Image -->
-    <div class="text-center mb-3">
-      <img src="<%= user.profileImage ? user.profileImage.url : '/images/default-profile.jpg' %>" 
-      alt="Profile" class="rounded-circle" width="80" height="80">
-    </div>
+  .btn-save {
+    background-color: #6c5ce7;
+    border: none;
+    padding: 0.6rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
 
-    <!-- Username -->
-    <div class="mb-3">
-      <label class="form-label">Username</label>
-      <input type="text" class="form-control rounded-3" name="username" value="<%= user.username %>" required>
-    </div>
+  .btn-save:hover {
+    background-color: #5a4bd1;
+  }
+</style>
 
-    <!-- Email -->
-    <div class="mb-3">
-      <label class="form-label">Email</label>
-      <input type="email" class="form-control rounded-3" name="email" value="<%= user.email %>" required>
-    </div>
+<div class="container py-5">
+  <div class="profile-card">
+    <h3 class="text-center">Profile Settings</h3>
 
-    <!-- Change Profile Image -->
-    <div class="mb-3">
-      <label class="form-label">Change Profile Image</label>
-      <input type="file" class="form-control rounded-3" name="profileImage" accept="image/*">
-    </div>
+    <form action="/profile/settings" method="POST" enctype="multipart/form-data">
+      <!-- Profile Image -->
+      <div class="text-center mb-4">
+        <img src="<%= user.profileImage ? user.profileImage.url : '/images/default-profile.jpg' %>" 
+             alt="Profile" class="profile-pic">
+      </div>
 
-    <button type="submit" class="btn btn-primary w-100 rounded-3">Save Changes</button>
+      <!-- Username -->
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" value="<%= user.username %>" required>
+      </div>
 
-  </form>
+      <!-- Email -->
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" value="<%= user.email %>" required>
+      </div>
+
+      <!-- Change Image -->
+      <div class="mb-4">
+        <label class="form-label">Change Profile Image</label>
+        <input type="file" name="profileImage" class="form-control" accept="image/*">
+      </div>
+
+      <button type="submit" class="btn btn-save w-100">Save Changes</button>
+    </form>
+  </div>
 </div>
-

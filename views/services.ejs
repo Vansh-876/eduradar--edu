@@ -1,0 +1,59 @@
+<% layout('layouts/boilerplate') %>
+
+<style>
+  .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .display-4 {
+      font-size: 2rem;
+    }
+    .service-icon {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<div class="container my-5">
+  <div class="text-center mb-5 pt-5">
+    <h1 class="display-4 fw-bold">Our <span class="text-primary">Services</span></h1>
+    <p class="lead text-muted">EduRadar offers a wide range of tools to support students throughout their journey.</p>
+  </div>
+
+  <div class="row text-center mb-5">
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 border-0 shadow-sm rounded-4 p-3">
+        <div class="card-body">
+          <i class="bi bi-journal-text service-icon text-info"></i>
+          <h5 class="card-title fw-bold">Coaching Discovery</h5>
+          <p class="card-text text-muted">Explore nearby coaching centers, read reviews, and compare options all in one place.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 border-0 shadow-sm rounded-4 p-3">
+        <div class="card-body">
+          <i class="bi bi-book service-icon text-warning"></i>
+          <h5 class="card-title fw-bold">Book Marketplace</h5>
+          <p class="card-text text-muted">Buy or rent academic books from verified sellers, rated by fellow learners.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 border-0 shadow-sm rounded-4 p-3">
+        <div class="card-body">
+          <i class="bi bi-building service-icon text-success"></i>
+          <h5 class="card-title fw-bold">Study Spaces</h5>
+          <p class="card-text text-muted">Find peaceful, student-friendly spaces around you for focused learning or group study.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-light rounded-4 p-5 text-center shadow-sm">
+    <h3 class="mb-3 fw-semibold">Ready to take advantage of our services?</h3>
+    <a href="/listings" class="btn btn-primary btn-lg px-4 py-2">Browse Listings</a>
+  </div>
+</div>

@@ -1,181 +1,190 @@
 <% layout("/layouts/boilerplate") %>
-  <style>
-    .form-control,
-    .btn {
-      border-radius: 10px;
-    }
 
-    .form-control {
-      border-radius: 10px;
-      border: 1.5px solid #ccc;
-      box-shadow: none;
-      padding: 0.4rem 0.4rem;
-      font-size: 1rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
+<style>
+  .form-control,
+  .btn {
+    border-radius: 10px;
+  }
 
-    .form-control:focus {
-      border-color: #6c5ce7;
-      box-shadow: 0 0 0 0.15rem rgba(108, 92, 231, 0.25);
-      outline: none;
-    }
+  .form-control {
+    border: 1.5px solid #ccc;
+    padding: 0.4rem 0.4rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    .form-label {
-      font-weight: 500;
-      margin-bottom: 0.3rem;
-    }
+  .form-control:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 0 0.15rem rgba(108, 92, 231, 0.25);
+    outline: none;
+  }
 
-    .btn-primary {
-      background-color: #e6b631;
-      border-color: #e6b631;
-      font-weight: 500;
-    }
+  .form-label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
 
-    .btn-primary:hover {
-      background-color: #e0a800;
-    }
+  .btn-primary {
+    background-color: #e6b631;
+    border-color: #e6b631;
+    font-weight: 500;
+  }
 
-    .btn:focus,
-    .btn-primary:focus,
-    .btn-primary:active,
-    .btn-primary:focus-visible {
-      box-shadow: none !important;
-      outline: none !important;
-    }
-  </style>
+  .btn-primary:hover {
+    background-color: #e0a800;
+  }
 
+  .btn:focus,
+  .btn-primary:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+</style>
 
-  <div class="container py-5 mt-5">
-    <div class="text-center">
-      <h2 class="mb-4">Edit Listing</h2>
+<div class="container py-5 mt-5">
+  <div class="text-center">
+    <h2 class="mb-4">Edit Listing</h2>
+  </div>
+
+  <form class="needs-validation" novalidate action="/listings/<%= listing._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <!-- Business Title -->
+    <div class="mb-3">
+      <label class="form-label">Business Title</label>
+      <input type="text" class="form-control" name="listing[title]" value="<%= listing.title %>" required>
+      <div class="invalid-feedback">Please provide a title.</div>
     </div>
 
-    <form class="needs-validation" novalidate action="/listings/<%= listing._id %>?_method=PUT" method="POST"
-      enctype="multipart/form-data">
+    <!-- Business Name -->
+    <div class="mb-3">
+      <label class="form-label">Business Name</label>
+      <input type="text" class="form-control" name="listing[name]" value="<%= listing.name %>" required>
+      <div class="invalid-feedback">Please provide the name.</div>
+    </div>
 
-      <!-- Title -->
-      <div class="mb-3">
-        <label class="form-label">Business Title</label>
-        <input type="text" class="form-control" name="listing[title]" value="<%= listing.title %>" required />
-        <div class="valid-feedback">✅ Looks good!</div>
-        <div class="invalid-feedback">Please provide a title.</div>
+    <!-- Location -->
+    <div class="mb-3">
+      <label class="form-label">Location</label>
+      <input type="text" class="form-control" name="listing[location]" value="<%= listing.location %>" required>
+      <div class="invalid-feedback">Please provide a location.</div>
+    </div>
+
+    <!-- Category -->
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-select" name="listing[category]" id="category" required>
+        <option value="">Select Category</option>
+        <option value="Bookstore" <%= listing.category === 'Bookstore' ? 'selected' : '' %>>Bookstore</option>
+        <option value="Library" <%= listing.category === 'Library' ? 'selected' : '' %>>Library</option>
+        <option value="Stationery" <%= listing.category === 'Stationery' ? 'selected' : '' %>>Stationery</option>
+        <option value="Cyber Cafe" <%= listing.category === 'Cyber Cafe' ? 'selected' : '' %>>Cyber Cafe</option>
+        <option value="Coaching" <%= listing.category === 'Coaching' ? 'selected' : '' %>>Coaching</option>
+        <option value="institution" <%= listing.category === 'institution' ? 'selected' : '' %>>Institution</option>
+      </select>
+    </div>
+
+    <!-- Subcategory (conditionally shown via JS) -->
+    <div class="mb-3" id="subcategory-wrapper" style='<%= listing.category === "institution" ? "" : "display:none;" %>'>
+      <label for="subcategory" class="form-label">Subcategory</label>
+      <select class="form-select" name="listing[subcategory]" id="subcategory">
+        <option value="">Select Subcategory</option>
+        <option value="school" <%= listing.subcategory === 'school' ? 'selected' : '' %>>School</option>
+        <option value="college" <%= listing.subcategory === 'college' ? 'selected' : '' %>>College</option>
+        <option value="university" <%= listing.subcategory === 'university' ? 'selected' : '' %>>University</option>
+      </select>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" name="listing[description]" rows="3" required><%= listing.description %></textarea>
+      <div class="invalid-feedback">Please enter a short description.</div>
+    </div>
+
+    <!-- Current Image -->
+    <div class="mb-3">
+      Original Image: <br>
+      <img src="<%= originalImageUrl %>" alt="Original Image" width="200">
+    </div>
+
+    <!-- Upload New Image -->
+    <div class="mb-3">
+      <label class="form-label">Upload New Image</label>
+      <input type="file" class="form-control" name="listing[image]">
+    </div>
+
+    <!-- Contact & Open Hours -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Contact</label>
+        <input type="text" class="form-control" name="listing[contact]" value="<%= listing.contact %>">
       </div>
 
-      <!-- Business Name -->
-      <div class="mb-3">
-        <label class="form-label">Business Name</label>
-        <input type="text" class="form-control" name="listing[name]" value="<%= listing.name %>" required />
-        <div class="valid-feedback">✅ Looks good!</div>
-        <div class="invalid-feedback">Please provide the name.</div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Open Hours</label>
+        <input type="text" class="form-control" name="listing[openHours]" value="<%= listing.openHours %>">
+      </div>
+    </div>
+
+    <!-- Alternate Contact -->
+    <div class="mb-3">
+      <label class="form-label">Alternate Contact</label>
+      <input type="text" class="form-control" name="listing[alternateContact]" value="<%= listing.alternateContact %>">
+    </div>
+
+    <!-- WhatsApp & Email -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">WhatsApp Number</label>
+        <input type="text" class="form-control" name="listing[whatsappNumber]" value="<%= listing.whatsappNumber %>">
       </div>
 
-      <!-- Location -->
-      <div class="mb-3">
-        <label class="form-label">Location</label>
-        <input type="text" class="form-control" name="listing[location]" value="<%= listing.location %>" required />
-        <div class="valid-feedback">✅ Looks good!</div>
-        <div class="invalid-feedback">Please provide a location.</div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="listing[email]" value="<%= listing.email %>" required>
+        <div class="invalid-feedback">Please enter a valid email address.</div>
+      </div>
+    </div>
+
+    <!-- Website -->
+    <div class="mb-3">
+      <label class="form-label">Website</label>
+      <input type="url" class="form-control" name="listing[website]" value="<%= listing.website %>">
+    </div>
+
+    <!-- Google Maps -->
+    <div class="mb-3">
+      <label class="form-label">Google Map Link</label>
+      <input type="url" class="form-control" name="listing[googleMapLink]" value="<%= listing.googleMapLink %>">
+    </div>
+
+    <!-- Facebook & Instagram -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Facebook Page</label>
+        <input type="url" class="form-control" name="listing[facebookPage]" value="<%= listing.facebookPage %>">
       </div>
 
-      <!-- Category -->
-      <div class="mb-3">
-        <label class="form-label">Category</label>
-        <select class="form-select" name="listing[category]" required>
-          <option value="">Choose...</option>
-          <option value="Stationery" <%=listing.category==='Stationery' ? 'selected' : '' %>>Stationery</option>
-          <option value="Library" <%=listing.category==='Library' ? 'selected' : '' %>>Library</option>
-          <option value="Cyber Cafe" <%=listing.category==='CyberCafe' ? 'selected' : '' %>>Cyber Cafe</option>
-          <option value="Bookstore" <%=listing.category==='Bookstore' ? 'selected' : '' %>>Bookstore</option>
-          <option value="Coaching" <%=listing.category==='Coaching' ? 'selected' : '' %>>Coaching</option>
-        </select>
-        <div class="valid-feedback">✅ Looks good!</div>
-        <div class="invalid-feedback">Please select a category.</div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Instagram Page</label>
+        <input type="url" class="form-control" name="listing[instagramPage]" value="<%= listing.instagramPage %>">
       </div>
+    </div>
 
-      <!-- Description -->
-      <div class="mb-3">
-        <label class="form-label">Description</label>
-        <textarea class="form-control" name="listing[description]" rows="3"
-          required><%= listing.description %></textarea>
-        <div class="valid-feedback">✅ Looks good!</div>
-        <div class="invalid-feedback">Please enter a short description.</div>
-      </div>
+    <!-- Submit -->
+    <button type="submit" class="btn btn-primary d-block mx-auto px-4 mt-4">Save Changes</button>
+  </form>
+</div>
 
-      <div class="mb-3">
-        Original Image <br />
-        <img src="<%= originalImageUrl %>" />
-      </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const categorySelect = document.getElementById("category");
+    const subcategoryWrapper = document.getElementById("subcategory-wrapper");
 
-      <!-- Image -->
-      <div class="mb-3">
-        <label class="form-label">Upload New Image</label>
-        <input type="file" class="form-control" name="listing[image]" />
-      </div>
+    function toggleSubcategory() {
+      subcategoryWrapper.style.display = categorySelect.value === "institution" ? "block" : "none";
+    }
 
-      <!-- Contact & Open Hours -->
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Contact</label>
-          <input type="text" class="form-control" name="listing[contact]" value="<%= listing.contact %>" />
-        </div>
-
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Open Hours</label>
-          <input type="text" class="form-control" name="listing[openHours]" value="<%= listing.openHours %>" />
-        </div>
-      </div>
-
-      <!-- Alternate Contact -->
-      <div class="mb-3">
-        <label class="form-label">Alternate Contact</label>
-        <input type="text" class="form-control" name="listing[alternateContact]"
-          value="<%= listing.alternateContact %>" />
-      </div>
-
-      <!-- WhatsApp -->
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label class="form-label">WhatsApp Number</label>
-          <input type="text" class="form-control" name="listing[whatsappNumber]"
-            value="<%= listing.whatsappNumber %>" />
-        </div>
-
-        <!-- Email -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-control" name="listing[email]" value="<%= listing.email %>" required />
-          <div class="invalid-feedback">Please enter a valid email address.</div>
-        </div>
-      </div>
-
-      <!-- Website -->
-      <div class="mb-3">
-        <label class="form-label">Website</label>
-        <input type="url" class="form-control" name="listing[website]" value="<%= listing.website %>" />
-      </div>
-
-      <!-- Google Map Link -->
-      <div class="mb-3">
-        <label class="form-label">Google Map Link</label>
-        <input type="url" class="form-control" name="listing[googleMapLink]" value="<%= listing.googleMapLink %>" />
-      </div>
-
-      <!-- Facebook -->
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Facebook Page</label>
-          <input type="url" class="form-control" name="listing[facebookPage]" value="<%= listing.facebookPage %>" />
-        </div>
-
-        <!-- Instagram -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Instagram Page</label>
-          <input type="url" class="form-control" name="listing[instagramPage]" value="<%= listing.instagramPage %>" />
-        </div>
-      </div>
-
-
-      <button type="submit" class="btn btn-primary d-block mx-auto px-4 mt-4 mb-0">Save Changes</button>
-
-    </form>
-  </div>
+    categorySelect.addEventListener("change", toggleSubcategory);
+    toggleSubcategory(); // Initial state
+  });
+</script>

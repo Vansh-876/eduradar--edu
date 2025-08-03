@@ -1,15 +1,74 @@
 <% layout('layouts/boilerplate') %>
-  <body>
-    <div class="container error-container">
-      <div class="error-card">
-        <div class="error-code">
-          <%= err.statusCode || 500 %>
-        </div>
-        <div class="error-msg">
-          <%= err.message || "Something went wrong!" %>
-        </div>
-        <a href="/" class="btn btn-outline-primary">← Go Home</a>
+
+<style>
+  body {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .error-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .error-card {
+    background-color: #fff;
+    padding: 3rem 4rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .error-code {
+    font-size: 6rem;
+    font-weight: 800;
+    color: #ff4b5c;
+  }
+
+  .error-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: #ff4b5c;
+  }
+
+  .error-msg {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn-home {
+    padding: 0.7rem 1.5rem;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+
+  .btn-home:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<body>
+  <div class="error-wrapper">
+    <div class="error-card">
+      <div class="error-icon">⚠️</div>
+      <div class="error-code"><%= err.statusCode || 500 %></div>
+      <div class="error-msg">
+        <%= err.message || "Oops! Something went wrong on our end." %>
       </div>
+      <a href="/" class="btn-home">← Go to Home</a>
     </div>
-  </body>
-</html>
+  </div>
+</body>

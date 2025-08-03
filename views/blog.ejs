@@ -1,0 +1,110 @@
+<% layout('layouts/boilerplate') %>
+
+<style>
+  .section-title {
+    margin-top: 120px!important;
+    font-size: 32px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+  }
+
+  .blog-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .blog-body {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+
+  .blog-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .blog-meta {
+    font-size: 14px;
+    color: #999;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  .blog-desc {
+    font-size: 16px;
+    color: #555;
+  }
+
+  @media (max-width: 768px) {
+    .blog-card img {
+      height: 150px;
+    }
+
+    .section-title {
+      font-size: 26px;
+    }
+  }
+</style>
+
+<div class="section-title">
+   <div class="text-center mb-5">
+    <h1 class="display-4 fw-bold">Resources<span class="text-primary">Blogs</span></h1>
+    <p class="lead text-muted"> Explore our blog for quick updates, helpful tips, and stories that keep you informed and inspired on your learning journey.
+</p>
+  </div>
+
+  
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="blog-card">
+        <img src="images/blog1.jpg" alt="Blog 1">
+        <div class="blog-body">
+          <h5 class="blog-title">Top 10 Study Hacks for College Students</h5>
+          <p class="blog-meta">Posted on Aug 1, 2025 by EduRadar Team</p>
+          <p class="blog-desc">Discover effective study habits, time management tips, and memory tricks to boost your academic performance.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="blog-card">
+        <img src="images/blog2.jpg" alt="Blog 2">
+        <div class="blog-body">
+          <h5 class="blog-title">How to Build a Great Resume as a Student</h5>
+          <p class="blog-meta">Posted on July 25, 2025 by EduRadar Team</p>
+          <p class="blog-desc">A step-by-step guide to crafting an impressive resume that grabs recruiter attention, even with limited experience.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="blog-card">
+        <img src="images/blog3.jpg" alt="Blog 3">
+        <div class="blog-body">
+          <h5 class="blog-title">Top 5 Free Tools Every Student Should Use</h5>
+          <p class="blog-meta">Posted on July 18, 2025 by EduRadar Team</p>
+          <p class="blog-desc">Explore the best free tools for note-taking, collaboration, and organizing your study life effectively.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

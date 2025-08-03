@@ -118,6 +118,38 @@ app.use((req, res, next) => {
 });
 
 app.get('/', homeController.homepage);
+app.get("/about", (req, res) => {
+  res.render("aboutus"); // file name is aboutus.ejs
+});
+app.get("/services", (req, res) => {
+  res.render("services");
+});
+
+app.get('/features', (req, res) => {
+  res.render('features');
+});
+
+app.get('/contact', (req, res) => {
+  res.render('contact');
+});
+app.get("/blog", (req, res) => {
+  res.render("blog");
+});
+app.get("/faq", (req, res) => {
+  res.render("faq");
+});
+app.get('/terms', (req, res) => {
+  res.render('terms', { page: 'terms' });
+});
+
+app.get('/privacy', (req, res) => {
+  res.render('privacy', { page: 'privacy' });
+});
+
+app.get('/copyright', (req, res) => {
+  res.render('copyright', { page: 'copyright' });
+});
+
 app.use("/", listingsRoutes);
 app.use("/listings/:id/reviews", reviewsRoutes);
 app.use("/", UserRoutes);

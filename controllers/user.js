@@ -83,12 +83,12 @@ module.exports.changePassword = async (req, res) => {
 
   if (!isMatch.user) {
     req.flash('error', 'Incorrect current password!');
-    return res.redirect('/profile/change-password');
+    return res.redirect('/changePassword');
   }
 
   if (currentPassword === newPassword) {
     req.flash('error', 'New password cannot be the same as current password!');
-    return res.redirect('/profile/change-password');
+    return res.redirect('/changePassword');
   }
 
   await user.setPassword(newPassword);
@@ -151,4 +151,3 @@ module.exports.vendorLogout = (req, res) => {
     res.redirect('/');
   });
 };
-
