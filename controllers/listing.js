@@ -21,7 +21,17 @@ module.exports.index = async (req, res, next) => {
     ];
   }
 
-  const allListings = await Listing.find(filter);
+  const allListings = await Listing.find(filter).populate('reviews');
+
+  // Calculate average rating for each listing
+  allListings.forEach(listing => {
+    if (listing.reviews && listing.reviews.length > 0) {
+      const total = listing.reviews.reduce((acc, review) => acc + review.rating, 0);
+      listing.avgRating = (total / listing.reviews.length).toFixed(1); // one decimal place
+    } else {
+      listing.avgRating = 0;
+    }
+  });
   res.render("listings/index", { allListings, category, search, location, activePage: "listings" });
 };
 
