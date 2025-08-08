@@ -15,6 +15,7 @@ const listingsRoutes = require("./routes/listing.js");
 const reviewsRoutes = require("./routes/review.js");
 const UserRoutes = require("./routes/user.js");
 const vendorRoutes = require('./routes/vendor.js');
+const bookmarkRoutes = require("./routes/bookmark.js");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
@@ -102,15 +103,14 @@ app.use((req, res, next) => {
 });
 
 app.use(async (req, res, next) => {
-  if (req.isAuthenticated()) {
-    const user = await User.findById(req.user._id);
+  if (req.user) {
+    const user = await User.findById(req.user._id).populate("bookmarks");
     res.locals.currentUser = user;
   } else {
     res.locals.currentUser = null;
   }
   next();
 });
-
 app.use((req, res, next) => {
   res.locals.search = req.query.search || "";
   res.locals.location = req.query.location || "";
@@ -154,6 +154,8 @@ app.use("/", listingsRoutes);
 app.use("/listings/:id/reviews", reviewsRoutes);
 app.use("/", UserRoutes);
 app.use('/', vendorRoutes);
+app.use("/", bookmarkRoutes);
+
 
 
 // 404 Error Handling
