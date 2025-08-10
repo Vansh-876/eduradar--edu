@@ -23,10 +23,16 @@ const userSchema = new schema({
     type: [String],
     enum: ['user', 'vendor', 'admin'],
     default: 'user'
-  }
+  },
+  bookmarks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Listing"
+    }
+  ]
 });
 
-userSchema.plugin(passportLocalMongoose, {
+userSchema.plugin(passportLocalMongoose, { 
     usernameField: 'email'
 });
 
