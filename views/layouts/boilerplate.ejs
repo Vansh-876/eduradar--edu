@@ -54,6 +54,83 @@
         }
 
       </script>
+      <% if (currentUser) { %>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    (function () {
+      const socket = io(); // Connect to socket.io server
+      const userId = "<%= currentUser._id %>";
+
+      // When connected, join user's personal room
+      socket.on('connect', () => {
+        socket.emit('joinRoom', userId);
+        console.log('Socket connected, joined room:', userId);
+      });
+
+      // Listen for new notifications
+      socket.on('newNotification', (notif) => {
+        console.log('New notification:', notif);
+
+        // Update notification badge count
+        const badge = document.getElementById('notif-badge');
+        if (badge) {
+          let count = parseInt(badge.textContent) || 0;
+          count++;
+          badge.textContent = count;
+          badge.style.display = 'inline-block';
+          badge.classList.remove('bg-secondary');
+          badge.classList.add('bg-danger');
+        }
+
+        // Prepend new notification to dropdown list if exists
+        const dropdown = document.querySelector('#notifDropdown + .dropdown-menu');
+        if (dropdown) {
+          const li = document.createElement('li');
+          li.className = 'dropdown-item d-flex justify-content-between align-items-start notif-item';
+          li.setAttribute('data-id', notif._id);
+          li.innerHTML = `
+            <div>
+              <div>${notif.message}</div>
+              <small class="text-muted">${new Date(notif.createdAt).toLocaleString()}</small>
+            </div>
+            <div>${!notif.read ? '<span class="badge bg-primary">New</span>' : ''}</div>
+          `;
+          const divider = dropdown.querySelector('li.dropdown-divider');
+          if (divider) {
+            dropdown.insertBefore(li, divider);
+          } else {
+            dropdown.prepend(li);
+          }
+        }
+      });
+
+      // Click event to mark notification as read via AJAX
+      document.addEventListener('click', function (e) {
+        const item = e.target.closest('.notif-item');
+        if (item && item.dataset.id) {
+          const notifId = item.dataset.id;
+
+          fetch(`/notifications/${notifId}/read`, { method: 'POST' })
+            .then(res => res.json())
+            .then(() => {
+              // Update badge count
+              const badge = document.getElementById('notif-badge');
+              if (badge) {
+                let count = parseInt(badge.textContent) || 0;
+                count = Math.max(0, count - 1);
+                badge.textContent = count;
+                if (count === 0) badge.style.display = 'none';
+              }
+              item.classList.add('text-muted');
+            })
+            .catch(() => {
+              console.error('Failed to mark notification as read');
+            });
+        }
+      });
+    })();
+  </script>
+<% } %>
 
 </body>
 

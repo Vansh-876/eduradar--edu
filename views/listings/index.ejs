@@ -152,24 +152,30 @@
 
 
   <div class="d-flex gap-2">
-    <% if (currentUser) { %>
-      <a href="/listings/<%= listing._id %>" class="btn btn-sm btn-outline-primary">View</a>
+   <% if (currentUser) { %>
+  <% if (!currentUser.role.includes('vendor')) { %>
+    <!-- Normal users only -->
+    <a href="/listings/<%= listing._id %>" class="btn btn-sm btn-outline-primary">View</a>
 
-<% if (currentUser && currentUser.bookmarks && currentUser.bookmarks.some(b => b._id.toString() === listing._id.toString())) { %>
-  <button class="btn btn-sm btn-success" disabled title="Saved">
-    <i class="fa-solid fa-bookmark"></i>
-  </button>
-<% } else { %>
-  <form class="bookmark-form" data-id="<%= listing._id %>" style="display:inline;">
-    <button type="submit" class="btn btn-sm btn-outline-warning" title="Save">
-      <i class="fa-regular fa-bookmark"></i>
-    </button>
-  </form>
-<% } %>
-      
+    <% if (currentUser.bookmarks && currentUser.bookmarks.some(b => b._id.toString() === listing._id.toString())) { %>
+      <button class="btn btn-sm btn-success" disabled title="Saved">
+        <i class="fa-solid fa-bookmark"></i>
+      </button>
     <% } else { %>
-      <a href="/login" class="btn btn-sm btn-outline-primary">View</a>
+      <form class="bookmark-form" data-id="<%= listing._id %>" style="display:inline;">
+        <button type="submit" class="btn btn-sm btn-outline-warning" title="Save">
+          <i class="fa-regular fa-bookmark"></i>
+        </button>
+      </form>
     <% } %>
+  <% } else { %>
+    <!-- Vendor ko sirf view ka option -->
+    <a href="/listings/<%= listing._id %>" class="btn btn-sm btn-outline-primary">View</a>
+  <% } %>
+<% } else { %>
+  <a href="/login" class="btn btn-sm btn-outline-primary">View</a>
+<% } %>
+
   </div>
 </div>
 

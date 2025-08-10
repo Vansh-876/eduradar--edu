@@ -30,10 +30,9 @@ const userSchema = new schema({
       ref: "Listing"
     }
   ]
-
 });
 
-userSchema.plugin(passportLocalMongoose, {
+userSchema.plugin(passportLocalMongoose, { 
     usernameField: 'email'
 });
 

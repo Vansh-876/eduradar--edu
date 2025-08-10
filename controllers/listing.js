@@ -1,4 +1,7 @@
 const Listing = require("../models/listing");
+const notificationService = require('../services/notificationService');
+const User = require('../models/user');
+const Notification = require('../models/Notification'); // if you have this model
 
 module.exports.index = async (req, res, next) => {
   const { category, search, location } = req.query;
@@ -21,18 +24,41 @@ module.exports.index = async (req, res, next) => {
     ];
   }
 
-  const allListings = await Listing.find(filter).populate('reviews');
+  try {
+    const allListings = await Listing.find(filter).populate('reviews');
 
-  // Calculate average rating for each listing
-  allListings.forEach(listing => {
-    if (listing.reviews && listing.reviews.length > 0) {
-      const total = listing.reviews.reduce((acc, review) => acc + review.rating, 0);
-      listing.avgRating = (total / listing.reviews.length).toFixed(1); // one decimal place
-    } else {
-      listing.avgRating = 0;
+    // Calculate average rating for each listing
+    allListings.forEach(listing => {
+      if (listing.reviews && listing.reviews.length > 0) {
+        const total = listing.reviews.reduce((acc, review) => acc + review.rating, 0);
+        listing.avgRating = (total / listing.reviews.length).toFixed(1);
+      } else {
+        listing.avgRating = 0;
+      }
+    });
+
+    // Fetch notification count and recent notifications if user is logged in
+    let notificationCount = 0;
+    let recentNotifications = [];
+
+    if (req.user) {
+      notificationCount = await Notification.countDocuments({ recipientId: req.user._id, read: false });
+      recentNotifications = await Notification.find({ recipientId: req.user._id }).sort({ createdAt: -1 }).limit(5);
     }
-  });
-  res.render("listings/index", { allListings, category, search, location, activePage: "listings" });
+
+    res.render("listings/index", {
+      allListings,
+      category,
+      search,
+      location,
+      activePage: "listings",
+      currentUser: req.user,
+      notificationCount,
+      recentNotifications
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 
@@ -41,20 +67,41 @@ module.exports.renderNewForm = async (req, res) => {
 };
 
 module.exports.createListing = async (req, res, next) => {
-if (req.body.listing.tags) {
-  if (typeof req.body.listing.tags === "string") {
-    req.body.listing.tags = req.body.listing.tags.split(',').map(tag => tag.trim());
+  try {
+    if (req.body.listing.tags) {
+      if (typeof req.body.listing.tags === "string") {
+        req.body.listing.tags = req.body.listing.tags.split(',').map(tag => tag.trim());
+      }
+    }
+
+    const url = req.file.path;
+    const filename = req.file.filename;
+    const newListing = new Listing(req.body.listing);
+    newListing.image = { url, filename };
+    newListing.owner = req.user._id;
+    await newListing.save();
+
+    // Send notification to all admins
+    const admins = await User.find({ role: 'admin' }); // Change this filter as needed
+    for (let admin of admins) {
+      await notificationService.createNotification({
+        userId: admin._id,              // recipient
+        actorId: req.user._id,          // who created the listing
+        type: 'listing_created',
+        message: `${req.user.username} created a new listing "${newListing.name}"`,
+        link: `/listings/${newListing._id}`
+      });
+    }
+
+    req.flash("success", "New listing created successfully!");
+    res.redirect("/listings");
+  } catch (err) {
+    console.error(err);
+    req.flash("error", "Something went wrong while creating the listing.");
+    res.redirect("/listings");
   }
-}
-  const url = req.file.path;
-  const filename = req.file.filename;
-  const newListing = new Listing(req.body.listing);
-  newListing.image = { url, filename };
-  newListing.owner = req.user._id;
-  await newListing.save();
-  req.flash("success", "New listing created successfully!");
-  res.redirect("/listings");
 };
+
  module.exports.showListing = async (req, res) => {
   const listing = await Listing.findById(req.params.id)
     .populate("owner")
