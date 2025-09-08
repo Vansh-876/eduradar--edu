@@ -25,10 +25,12 @@ const listingSchema = Joi.object({
       'institution'
     ).required(),
 
- subcategory: Joi.alternatives().conditional('category', {
+subcategory: Joi.alternatives().conditional('category', {
   is: 'institution',
-  then: Joi.string().valid('school', 'college', 'university').required(),
-  otherwise: Joi.string().valid('school', 'college', 'university').optional()
+  then: Joi.string()
+    .valid('school', 'college', 'university')
+    .required(),
+  otherwise: Joi.string().allow('', null).optional()
 }),
 
       board: Joi.string().optional().allow(""),

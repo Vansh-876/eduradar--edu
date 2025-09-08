@@ -81,6 +81,12 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, "/public")));
 app.use('/images', express.static(path.join(__dirname, "images")));
 
+app.use((req, res, next) => {
+  res.locals.activePage = null;
+  next();
+});
+
+
 // Session Store configuration
 const store = MongoStore.create({
   mongoUrl: dbUrl,

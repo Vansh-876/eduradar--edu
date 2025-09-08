@@ -2,251 +2,382 @@
 
 <style>
   body {
-    background: #f9fbfc;
     font-family: 'Inter', sans-serif;
-    color: #1e2e2d;
+    background: #f3f7f5;
+    color: #1c2d27;
   }
 
-  .vendor-dashboard {
-    max-width: 1300px;
-    margin: auto;
-    padding: 40px 20px;
+  .dashboard-container {
+    max-width: 1280px;
+    margin: 70px auto;
+    padding: 30px 20px;
   }
 
-  .greeting-section {
-    background: linear-gradient(135deg, #003e29, #467061);
-    color: white;
+  /* Header / Greeting */
+  .dashboard-header {
+    background: rgba(0, 62, 41, 0.95);
+    color: #fff;
+    padding: 35px;
+    border-radius: 20px;
     margin-top: 60px;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-    margin-bottom: 40px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    box-shadow: 0 12px 35px rgba(0, 62, 41, 0.25);
   }
 
-  .greeting-section h2 {
-    font-size: 2rem;
-    font-weight: 600;
+  .dashboard-header h2 {
     margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
   }
 
-  .scroll-section {
-    overflow-x: auto;
-    display: flex;
-    gap: 20px;
-    padding-bottom: 10px;
-    margin-bottom: 40px;
+  .dashboard-header p {
+    margin-top: 8px;
+    opacity: 0.9;
   }
 
-  .scroll-section::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  .scroll-section::-webkit-scrollbar-thumb {
-    background-color: #b8d5c4;
-    border-radius: 10px;
-  }
-
-  .scroll-card {
-    min-width: 220px;
+  .dashboard-header a {
     background: white;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
-    flex-shrink: 0;
-    text-align: center;
-    transition: 0.3s ease;
-  }
-
-  .scroll-card:hover {
-    transform: translateY(-4px);
-  }
-
-  .scroll-card h5 {
-    margin-bottom: 5px;
-    font-weight: 600;
-    font-size: 1.1rem;
-  }
-
-  .scroll-card .number {
-    font-size: 1.8rem;
     color: #003e29;
-    font-weight: bold;
-  }
-
-  .tiles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 25px;
-    margin-bottom: 40px;
-  }
-
-  .tile-card {
-    background: white;
-    border-radius: 20px;
-    padding: 30px 25px;
-    box-shadow: 0 8px 25px rgba(0, 62, 41, 0.06);
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 10px;
     transition: 0.3s;
-    text-align: left;
+  }
+
+  .dashboard-header a:hover {
+    background: #467061;
+    color: white;
+  }
+
+  /* Stats Section */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    transition: 0.3s ease;
+    text-align: center;
     position: relative;
   }
 
-  .tile-card:hover {
-    transform: scale(1.015);
-    box-shadow: 0 10px 30px rgba(0, 62, 41, 0.12);
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
   }
 
-  .tile-card h6 {
+  .stat-icon {
+    font-size: 2rem;
+    color: #003e29;
+    margin-bottom: 12px;
+  }
+
+  .stat-card h5 {
+    margin: 0;
+    font-size: 1rem;
     font-weight: 600;
-    font-size: 1.1rem;
     color: #003e29;
   }
 
-  .tile-card p {
+  .stat-card .number {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-top: 6px;
+  }
+
+  /* Quick Actions */
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+  }
+
+  .action-card {
+    background: linear-gradient(135deg, #ffffff, #f2f8f5);
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s;
+  }
+
+  .action-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+  }
+
+  .action-card h6 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #003e29;
+  }
+
+  .action-card p {
     font-size: 0.9rem;
-    color: #555;
-    margin: 8px 0 15px;
+    color: #444;
+    margin-bottom: 15px;
   }
 
-  .tile-card .btn {
-    font-size: 0.85rem;
+  .action-card a {
+    background: #003e29;
+    color: white;
     padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: 0.3s;
   }
 
-  .listing-preview {
-    padding: 30px;
+  .action-card a:hover {
+    background: #467061;
+  }
+
+  /* Recent Listings */
+  .recent-listings {
     background: white;
     border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 30px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
   }
 
-  .listing-preview h4 {
+  .recent-listings h4 {
     margin-bottom: 20px;
-    font-weight: bold;
+    font-weight: 700;
     color: #003e29;
   }
 
-  .listing-preview .listing-item {
+  .listing-item {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 12px 0;
+    justify-content: space-between;
     border-bottom: 1px solid #eee;
+    padding: 15px 0;
   }
 
   .listing-item:last-child {
     border-bottom: none;
   }
 
-  .listing-item img {
-    width: 70px;
-    height: 70px;
+  .listing-details {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .listing-details img {
+    width: 65px;
+    height: 65px;
     object-fit: cover;
     border-radius: 12px;
   }
 
   .listing-info h5 {
     margin: 0;
-    font-size: 1.05rem;
-    color: #003e29;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
   .listing-info small {
     color: #666;
   }
 
-  @media(max-width: 768px) {
-    .greeting-section {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 15px;
-    }
-
-    .tiles-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .scroll-section {
-      padding-left: 5px;
-    }
+  .listing-actions a,
+  .listing-actions button {
+    margin-left: 8px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
   }
+
+  .btn-edit {
+    background: #f6c343;
+    color: #222;
+  }
+
+  .btn-delete {
+    background: #e55353;
+    color: white;
+    border: none;
+  }
+
+  /* ---------------------- Responsive Dashboard ---------------------- */
+@media (max-width: 992px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .dashboard-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-header p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .quick-actions {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .recent-listings .listing-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .listing-details {
+    gap: 10px;
+    width: 100%;
+  }
+
+  .listing-details img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+  }
+
+  .listing-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .action-card h6 {
+    font-size: 1rem;
+  }
+
+  .action-card p {
+    font-size: 0.85rem;
+  }
+
+  .stat-card h5 {
+    font-size: 0.95rem;
+  }
+
+  .stat-card .number {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 20px 15px;
+  }
+
+  .dashboard-header {
+    padding: 25px;
+    border-radius: 15px;
+  }
+
+  .action-card {
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .recent-listings {
+    padding: 20px;
+    border-radius: 15px;
+  }
+}
+
 </style>
 
-<div class="vendor-dashboard">
 
-  <!-- Greeting Section -->
-  <div class="greeting-section">
+<div class="dashboard-container">
+
+  <!-- Header -->
+  <div class="dashboard-header">
     <div>
-      <h2>Welcome, <%= user.username %> 👋</h2>
-      <p class="mt-2">Manage your services, see analytics & grow smarter.</p>
+      <h2>Welcome back, <%= user.username %> 👋</h2>
+      <p>Here’s a quick overview of your business insights.</p>
     </div>
     <div>
-      <a href="/profile/settings" class="btn btn-light btn-sm">Edit Profile</a>
+      <a href="/profile/settings">Edit Profile</a>
     </div>
   </div>
 
-  <!-- Horizontal Scroll Stats -->
-  <div class="scroll-section">
-    <div class="scroll-card">
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-list"></i></div>
       <h5>Total Listings</h5>
       <div class="number">12</div>
     </div>
-    <div class="scroll-card">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-bookmark"></i></div>
       <h5>Bookings</h5>
       <div class="number">47</div>
     </div>
-    <div class="scroll-card">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-star"></i></div>
       <h5>Avg. Rating</h5>
       <div class="number">4.8★</div>
     </div>
-    <div class="scroll-card">
-      <h5>Pending Reviews</h5>
-      <div class="number">5</div>
-    </div>
-    <div class="scroll-card">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-users"></i></div>
       <h5>Monthly Visitors</h5>
       <div class="number">1.2k</div>
     </div>
   </div>
 
-  <!-- Explore Tiles -->
-  <div class="tiles-grid">
-    <div class="tile-card">
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <div class="action-card">
       <h6>Add New Listing</h6>
       <p>Post your coaching or education-related service.</p>
-      <a href="/listings/new" class="btn btn-success btn-sm">Add Now</a>
+      <a href="/listings/new">+ Add Now</a>
     </div>
-    <div class="tile-card">
-      <h6>Check Notifications</h6>
-      <p>Bookings, reviews, alerts & system messages.</p>
-      <a href="/notifications" class="btn btn-warning btn-sm">View</a>
+    <div class="action-card">
+      <h6>Notifications</h6>
+      <p>Check bookings, reviews, alerts & messages.</p>
+      <a href="/notifications">View</a>
     </div>
-
-    <div class="tile-card">
+    <div class="action-card">
       <h6>Account Settings</h6>
-      <p>Update profile info, change password, etc.</p>
-      <a href="/profile/settings" class="btn btn-secondary btn-sm">Open</a>
+      <p>Update your profile details and preferences.</p>
+      <a href="/profile/settings">Manage</a>
     </div>
   </div>
 
-  <!-- Latest Listings Preview -->
-  <div class="listing-preview mt-5">
-    <h4>My Recent Listings</h4>
+  <!-- Recent Listings -->
+  <div class="recent-listings mt-5">
+    <h4>Recent Listings</h4>
     <% listings.slice(0, 3).forEach(listing => { %>
       <div class="listing-item">
-        <img src="<%= listing.image.url %>" alt="listing">
-        <div class="listing-info">
-          <h5><%= listing.title %></h5>
-          <small><%= listing.location %> • <%= listing.category %></small>
+        <div class="listing-details">
+          <img src="<%= listing.image.url %>" alt="listing">
+          <div class="listing-info">
+            <h5><%= listing.title %></h5>
+            <small><%= listing.location %> • <%= listing.category %></small>
+          </div>
         </div>
-         <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning">Edit</a>
-            <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
-      <button class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-    </form>
+        <div class="listing-actions">
+          <a href="/listings/<%= listing._id %>/edit" class="btn-edit">Edit</a>
+          <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button class="btn-delete" onclick="return confirm('Are you sure?')">Delete</button>
+          </form>
+        </div>
       </div>
     <% }) %>
   </div>
 </div>
+

@@ -1,7 +1,7 @@
 const Listing = require("../models/listing");
 const notificationService = require('../services/notificationService');
 const User = require('../models/user');
-const Notification = require('../models/Notification'); // if you have this model
+const Notification = require('../models/Notification'); // agar aapka model hai
 
 module.exports.index = async (req, res, next) => {
   const { category, search, location } = req.query;
@@ -37,7 +37,6 @@ module.exports.index = async (req, res, next) => {
       }
     });
 
-    // Fetch notification count and recent notifications if user is logged in
     let notificationCount = 0;
     let recentNotifications = [];
 
@@ -61,9 +60,8 @@ module.exports.index = async (req, res, next) => {
   }
 };
 
-
 module.exports.renderNewForm = async (req, res) => {
-  res.render("listings/new");
+  res.render("listings/new", { activePage: "newListing" });
 };
 
 module.exports.createListing = async (req, res, next) => {
@@ -74,6 +72,11 @@ module.exports.createListing = async (req, res, next) => {
       }
     }
 
+    // ✅ FIX: subcategory clean up
+    if (req.body.listing.category !== "institution") {
+      req.body.listing.subcategory = undefined;
+    }
+
     const url = req.file.path;
     const filename = req.file.filename;
     const newListing = new Listing(req.body.listing);
@@ -81,12 +84,12 @@ module.exports.createListing = async (req, res, next) => {
     newListing.owner = req.user._id;
     await newListing.save();
 
-    // Send notification to all admins
-    const admins = await User.find({ role: 'admin' }); // Change this filter as needed
+    // Notify admins
+    const admins = await User.find({ role: 'admin' });
     for (let admin of admins) {
       await notificationService.createNotification({
-        userId: admin._id,              // recipient
-        actorId: req.user._id,          // who created the listing
+        recipientId: admin._id,
+        actorId: req.user._id,
         type: 'listing_created',
         message: `${req.user.username} created a new listing "${newListing.name}"`,
         link: `/listings/${newListing._id}`
@@ -102,14 +105,12 @@ module.exports.createListing = async (req, res, next) => {
   }
 };
 
- module.exports.showListing = async (req, res) => {
+module.exports.showListing = async (req, res) => {
   const listing = await Listing.findById(req.params.id)
     .populate("owner")
     .populate({
       path: "reviews",
-      populate: {
-        path: "author",
-      },
+      populate: { path: "author" }
     });
 
   if (!listing) {
@@ -117,40 +118,48 @@ module.exports.createListing = async (req, res, next) => {
     return res.redirect("/listings");
   }
 
-  res.render("listings/show", { listing });
+  res.render("listings/show", { listing, activePage: "listings" });
 };
 
-module.exports.renderEditForm=async (req, res) => {
+module.exports.renderEditForm = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
   if (!listing) {
     req.flash("error", "Listing not found");
     return res.redirect("/listings");
   }
-  let originalImageUrl=listing.image.url;
-   originalImageUrl= originalImageUrl.replace("/upload", "/upload/w_250");
-  res.render("listings/edit", { listing, originalImageUrl });
+  let originalImageUrl = listing.image.url;
+  originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_250");
+  res.render("listings/edit", { listing, originalImageUrl, activePage: "listings" });
 };
-
-module.exports.updateListing= async (req, res) => {
+module.exports.updateListing = async (req, res) => {
   const { id } = req.params;
-  const listing = await Listing.findByIdAndUpdate(id, req.body.listing);
- if (req.body.listing.tags) {
-  if (typeof req.body.listing.tags === "string") {
-    req.body.listing.tags = req.body.listing.tags.split(',').map(tag => tag.trim());
+
+  if (req.body.listing.tags) {
+    if (typeof req.body.listing.tags === "string") {
+      req.body.listing.tags = req.body.listing.tags.split(',').map(tag => tag.trim());
+    }
   }
-}
-  if(typeof req.file !== "undefined") {
-  const url= req.file.path;
-  const filename=req.file.filename;
-  listing.image = {url, filename};
-  await listing.save();
+
+  // ✅ FIX: subcategory clean up
+  if (req.body.listing.category !== "institution") {
+    req.body.listing.subcategory = undefined;
   }
+
+  const listing = await Listing.findByIdAndUpdate(id, req.body.listing, { new: true });
+
+  if (typeof req.file !== "undefined") {
+    const url = req.file.path;
+    const filename = req.file.filename;
+    listing.image = { url, filename };
+    await listing.save();
+  }
+
   req.flash("success", "Listing updated successfully!");
   res.redirect(`/listings/${id}`);
 };
 
-module.exports.deleteListing=async (req, res) => {
+module.exports.deleteListing = async (req, res) => {
   const { id } = req.params;
   await Listing.findByIdAndDelete(id);
   req.flash("success", "Listing deleted successfully!");

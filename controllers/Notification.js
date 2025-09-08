@@ -1,15 +1,15 @@
 // controllers/notificationController.js
-import Notification from "../models/Notification.js";
+const Notification = require('../models/Notification');
 
-// ✅ Create Notification
-export const createNotification = async (req, res) => {
+// Create Notification (API)
+exports.createNotification = async (req, res) => {
   try {
     const { userId, message, type } = req.body;
 
     const notification = new Notification({
       userId,
       message,
-      type
+      type,
     });
 
     await notification.save();
@@ -19,11 +19,10 @@ export const createNotification = async (req, res) => {
   }
 };
 
-// ✅ Get Notifications for a User
-export const getNotifications = async (req, res) => {
+// Get Notifications for a User (API)
+exports.getNotifications = async (req, res) => {
   try {
-    const notifications = await Notification.find({ userId: req.params.userId })
-      .sort({ createdAt: -1 });
+    const notifications = await Notification.find({ userId: req.params.userId }).sort({ createdAt: -1 });
 
     res.json({ success: true, notifications });
   } catch (error) {
@@ -31,12 +30,33 @@ export const getNotifications = async (req, res) => {
   }
 };
 
-// ✅ Mark as Read
-export const markAsRead = async (req, res) => {
+// Mark Notification as Read (API)
+exports.markAsRead = async (req, res) => {
   try {
     await Notification.findByIdAndUpdate(req.params.id, { isRead: true });
     res.json({ success: true });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Render Notifications Page (EJS view)
+exports.renderNotificationsPage = async (req, res) => {
+  try {
+    if (!req.user) {
+      req.flash('error', 'You must be logged in');
+      return res.redirect('/login');
+    }
+
+    const notifications = await Notification.find({ userId: req.user._id }).sort({ createdAt: -1 });
+
+    res.render('notifications/index', {
+      notifications,
+      activePage: 'notifications',
+      currentUser: req.user,
+    });
+  } catch (error) {
+    req.flash('error', 'Failed to load notifications');
+    res.redirect('/');
   }
 };

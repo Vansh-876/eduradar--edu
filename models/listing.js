@@ -5,14 +5,30 @@ const Schema = mongoose.Schema;
 const listingSchema = new Schema({
   title: { type: String, required: true },
   name: { type: String, required: true },
-  category: { type: String, required: true }, // e.g., institution, coaching, library
-  subcategory: {
-    type: String,
-    enum: ["school", "college", "university"],
-    required: function () {
-      return this.category === "institution";
-    },
+ category: { 
+  type: String, 
+  required: true 
+}, // e.g., institution, coaching, library
+
+subcategory: {
+  type: String,
+  enum: ["school", "college", "university"],
+  required: function () {
+    return this.category === "institution";
   },
+  validate: {
+    validator: function (value) {
+      // Agar category institution hai → enum check apply hoga
+      if (this.category === "institution") {
+        return ["school", "college", "university"].includes(value);
+      }
+      // Agar category institution nahi hai → subcategory blank bhi ho sakta hai
+      return value === undefined || value === null || value === "";
+    },
+    message: "Invalid subcategory",
+  },
+},
+
   description: { type: String, required: true },
   location: { type: String, required: true },
   contact: { type: String, required: true },
