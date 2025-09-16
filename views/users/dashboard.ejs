@@ -1,83 +1,148 @@
 <% layout("/layouts/boilerplate") %>
 
 <style>
+  body {
+    background: #f3f7f5;
+    font-family: 'Inter', sans-serif;
+    color: #1c2d27;
+  }
+
   .dashboard-card {
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .dashboard-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
   }
 
   .card-header {
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: #333;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #2c0859;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
   .stat-box {
-    background: #f5f7fa;
-    border-radius: 12px;
-    padding: 1.5rem;
+    background: linear-gradient(135deg, #ffffff, #f2f8f5);
+    border-radius: 16px;
+    padding: 2rem;
     text-align: center;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
 
   .stat-box:hover {
-    background: #e8f0fe;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
   }
 
   .stat-title {
     font-size: 1rem;
     color: #666;
+    margin-bottom: 8px;
   }
 
   .stat-value {
     font-size: 2rem;
-    font-weight: bold;
-    color: #2a73e8;
+    font-weight: 700;
+    color: #2A73E8;
+  }
+
+  .stat-icon {
+    font-size: 1.5rem;
+    color: #2c0859;
+    margin-bottom: 10px;
   }
 
   .activity-log li {
     padding: 1rem;
     border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
   .activity-log li:last-child {
     border-bottom: none;
   }
 
+  .activity-log .activity-icon {
+    width: 30px;
+    height: 30px;
+    background: #2A73E8;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
   @media (max-width: 768px) {
     .stat-box {
       margin-bottom: 1rem;
+    }
+
+    .card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card-header {
+      font-size: 1.25rem;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
     }
   }
 </style>
 
 <div class="container py-5" style="margin-top: 90px;">
+
+  <!-- Welcome & Stats -->
   <div class="row mb-4">
     <div class="col-12">
       <div class="dashboard-card p-4">
-        <div class="card-header mb-3">Welcome, <%= currentUser.username %> 👋</div>
+        <div class="card-header mb-4">
+          <img src="<%= user.profileImage ? user.profileImage.url : '/images/default-profile.jpg' %>" alt="Profile">
+          Welcome, <%= user.username %> 👋
+        </div>
         <div class="row g-4">
           <div class="col-md-4">
             <div class="stat-box">
+              <div class="stat-icon"><i class="fas fa-bookmark"></i></div>
               <div class="stat-title">Saved Listings</div>
               <div class="stat-value"><%= currentUser.savedListings ? currentUser.savedListings.length : 0 %></div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="stat-box">
+              <div class="stat-icon"><i class="fas fa-bell"></i></div>
               <div class="stat-title">Notifications</div>
               <div class="stat-value">3</div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="stat-box">
+              <div class="stat-icon"><i class="fas fa-history"></i></div>
               <div class="stat-title">Recent Activities</div>
               <div class="stat-value">5</div>
             </div>
@@ -87,14 +152,24 @@
     </div>
   </div>
 
+  <!-- Recent Activities -->
   <div class="row">
     <div class="col-12">
       <div class="dashboard-card p-4">
         <div class="card-header mb-3">Recent Activities</div>
         <ul class="list-unstyled activity-log">
-          <li>You saved a listing <small class="text-muted">· 2 days ago</small></li>
-          <li>You updated your profile <small class="text-muted">· 4 days ago</small></li>
-          <li>You changed your password <small class="text-muted">· 1 week ago</small></li>
+          <li>
+            <div class="activity-icon"><i class="fas fa-bookmark"></i></div>
+            You saved a listing <small class="text-muted">· 2 days ago</small>
+          </li>
+          <li>
+            <div class="activity-icon"><i class="fas fa-user-edit"></i></div>
+            You updated your profile <small class="text-muted">· 4 days ago</small>
+          </li>
+          <li>
+            <div class="activity-icon"><i class="fas fa-key"></i></div>
+            You changed your password <small class="text-muted">· 1 week ago</small>
+          </li>
         </ul>
       </div>
     </div>

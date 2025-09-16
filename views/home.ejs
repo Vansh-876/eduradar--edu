@@ -1,328 +1,629 @@
 <% layout("/layouts/boilerplate") %>
 
-<style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    scroll-behavior: smooth;
-  }
-
-  /* Hero Section */
-  .hero-section {
-    position: relative;
-    background: url('/images/homebg.jpg') center center/cover no-repeat;
-    padding: 160px 20px 80px;
-    text-align: center;
-    color: #fff;
-    min-height: 500px;
-    overflow: hidden;
-  }
-
-  .hero-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(42, 115, 232, 0.85), rgba(46, 16, 82, 0.85));
-    z-index: 0;
-  }
-
-  .hero-section * {
-    position: relative;
-    z-index: 1;
-  }
-
-    .hero-section .btn {
-      border-radius: 25px;
-      padding: 0.6rem 1.5rem;
-      font-size: 0.95rem;
-      background-color: #e6b631;
-      color: white;
-      font-weight: 550;
-      border: none;
-      transition: all 0.3s ease;
+  <!-- Hero Section -->
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
     }
 
-  .hero-section p {
-    font-size: 1.2rem;
-    margin: 15px 0 30px;
-    animation: fadeInUp 1s ease-in-out;
-  }
-
-  .search-bar {
-    max-width: 700px;
-    margin: auto;
-    background: #fff;
-    border-radius: 50px;
-    display: flex;
-    padding: 8px 15px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  }
-
-  .search-bar input {
-    border: none;
-    flex: 1;
-    border-radius: 50px;
-    padding: 12px 15px;
-    outline: none;
-    font-size: 1rem;
-  }
-
-  .search-bar button {
-    background: #ffbb33;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-
-  .search-bar button:hover {
-    background: #e6a600;
-    transform: scale(1.05);
-  }
-   @media (max-width: 767px) {
-    .hero-section h1 {
-      font-size: 2rem;
+    .hero-section {
+      position: relative;
+      background: url('/images/homebg.jpg') center center/cover no-repeat;
+      padding: 160px 20px 100px;
+      text-align: center;
+      color: #fff;
+      min-height: 600px;
+      overflow: hidden;
     }
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(100deg, rgba(42, 115, 232, 0.9), rgba(27, 16, 82, 0.9));
+      z-index: 0;
+    }
+
+    .hero-section * {
+      position: relative;
+      z-index: 1;
+    }
+
+  .hero-section h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    animation: fadeInDown 1s ease-in-out;
+  }
 
     .hero-section p {
-      font-size: 1rem;
+      font-size: 1.3rem;
+      margin: 20px 0 35px;
+      animation: fadeInUp 1.2s ease-in-out;
+      color: #f1f1f1;
     }
 
     .search-bar {
-      padding: 10px;
-      flex-direction: column; /* Stack inputs and button vertically */
-      border-radius: 25px;
+      max-width: 750px;
+      margin: auto;
+      background: #fff;
+      border-radius: 60px;
+      display: flex;
+      padding: 10px 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 1.4s ease-in-out;
     }
 
-    .search-bar input,
+    .search-bar input {
+      border: none;
+      flex: 1;
+      border-radius: 50px;
+      padding: 14px 18px;
+      outline: none;
+      font-size: 1rem;
+    }
+
     .search-bar button {
-      width: 100%;
-      flex: none;
+      background: #ffbb33;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: 0.3s;
+      color: #000;
     }
 
-    .search-bar button {
-      margin-top: 8px;
+    .search-bar button:hover {
+      background: #e6a600;
+      transform: scale(1.05);
+      color: #fff;
     }
-  }
-</style>
 
-<div class="hero-section">
-  <div class="container">
-    <h1>Discover & Explore Nearby Services</h1>
-    <p>Your one-stop platform for Bookstores, Libraries, Coaching Centers, and more</p>
-    <form action="/listings" method="GET" class="search-bar">
-      <input type="text" name="location" placeholder="Enter Location (e.g. Delhi)">
-      <input type="text" name="search" placeholder="Search services...">
-      <button type="submit">Search</button>
-    </form>
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 767px) {
+      .hero-section {
+        padding: 120px 15px 60px;
+        min-height: 500px;
+      }
+
+      .hero-section h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-section p {
+        font-size: 1rem;
+      }
+
+      .search-bar {
+        flex-direction: column;
+        border-radius: 25px;
+        padding: 12px;
+      }
+
+      .search-bar input,
+      .search-bar button {
+        width: 100%;
+        flex: none;
+      }
+
+      .search-bar button {
+        margin-top: 10px;
+      }
+    }
+  </style>
+
+  <div class="hero-section">
+    <div class="container">
+      <h1>Discover & Explore Nearby Services</h1>
+      <p>Your one-stop platform for Bookstores, Libraries, Coaching Centers, and more</p>
+      <form action="/listings" method="GET" class="search-bar">
+        <input type="text" name="location" placeholder="Enter Location (e.g. Delhi)">
+        <input type="text" name="search" placeholder="Search services...">
+        <button type="submit">Search</button>
+      </form>
+    </div>
   </div>
-</div>
-<!-- Intro Section -->
-<div class="container intro-section text-center py-5">
-  <h2 class="fw-bold mb-4">Welcome to EduRadar</h2>
 
-  <!-- Desktop paragraph -->
-  <p class="lead d-none d-md-block">
-    We help you find educational and academic services with ease and trust. Whether you're looking for a nearby
-    bookstore, a reputed coaching center, or just a peaceful library, EduRadar makes the search fast and effortless.
-  </p>
+  <!-- Intro Section -->
+  <style>
+    .intro-section {
+      padding: 80px 20px;
+      background: #f8f9fa;
+      border-radius: 20px;
+      margin-top: -40px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      position: relative;
+      z-index: 2;
+    }
 
-  <!-- Mobile paragraph -->
-  <p class="lead d-block d-md-none">
-    Discover libraries, bookstores, and coaching centers near you.<br> Quick & Reliable 🚀
-  </p>
-</div>
+    .intro-section h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
 
-<!-- Steps Section -->
+    .intro-section p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #444;
+    }
+  </style>
+
+  <div class="container intro-section text-center">
+     <h2 class="display-4 fw-bold">Welcome<span class="text-primary"> to EduRadar</span></h2>
+    <p class="lead d-none d-md-block">
+      We help you find educational and academic services with ease and trust. Whether you're looking for a nearby
+      bookstore, a reputed coaching center, or just a peaceful library, EduRadar makes the search fast and effortless.
+    </p>
+    <p class="lead d-block d-md-none">
+      Discover libraries, bookstores, and coaching centers near you.<br> Quick & Reliable 🚀
+    </p>
+  </div>
+
+  <!-- Steps Section -->
+  <style>
+    .steps-section {
+      background: #f8f9fa;
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .steps-section h2 {
+      font-weight: 700;
+      margin-bottom: 50px;
+    }
+
+    .step-box {
+      text-align: center;
+      padding: 40px 25px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .step-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    .step-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2A73E8, #6a11cb);
+      color: #fff;
+      font-size: 2rem;
+      box-shadow: 0 6px 15px rgba(42, 115, 232, 0.4);
+    }
+
+    .step-box h5 {
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #003e29;
+    }
+
+    .step-box p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .steps-line {
+      position: absolute;
+      top: 135px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 4px;
+      background: linear-gradient(to right, #2A73E8, #6a11cb);
+      z-index: 0;
+    }
+
+    @media (max-width: 768px) {
+      .steps-line {
+        display: none;
+      }
+    }
+  </style>
+
+  <div class="steps-section">
+    <div class="container text-center">
+      <h2 class="fw-bold">🚀 How It Works</h2>
+      <div class="steps-line"></div>
+      <div class="row g-4 position-relative">
+        <div class="col-md-4">
+          <div class="step-box">
+            <div class="step-icon"><i class="bi bi-search"></i></div>
+            <h5>1. Search</h5>
+            <p>Use our powerful search tool to find exactly what you need by location or keyword.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-box">
+            <div class="step-icon"><i class="bi bi-collection"></i></div>
+            <h5>2. Explore</h5>
+            <p>Browse through verified and detailed listings across multiple categories.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-box">
+            <div class="step-icon"><i class="bi bi-chat-dots"></i></div>
+            <h5>3. Connect</h5>
+            <p>Reach out directly to your chosen services and get started instantly!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Why Choose Us -->
 <style>
-  .steps-section {
-    background: #f8f9fa;
-    padding: 60px 0;
+  .why-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f9fafc, #ffffff);
   }
-
-  .step-box {
-    text-align: center;
-    padding: 30px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
-    transition: 0.3s;
+  .why-section h2 {
+    font-weight: 800;
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+    position: relative;
   }
-
-  .step-box:hover {
-    transform: translateY(-6px);
+  .why-section h2::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #2A73E8, #6a11cb);
   }
-
-  .step-box i {
-    font-size: 2.5rem;
+  .why-section p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.7;
+  }
+  .why-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  .why-list li {
+    display: flex;
+    align-items: center;
     margin-bottom: 15px;
+    font-size: 1rem;
+    color: #333;
+    transition: transform 0.2s ease;
+  }
+  .why-list li i {
+    font-size: 1.3rem;
+    margin-right: 12px;
     color: #2A73E8;
   }
+  .why-list li:hover {
+    transform: translateX(6px);
+    color: #2A73E8;
+  }
+  .why-section img {
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+  }
+  .why-section img:hover {
+    transform: scale(1.03);
+  }
 </style>
 
-<div class="steps-section">
+<div class="why-section">
   <div class="container">
-    <h2 class="text-center fw-bold mb-5">How It Works</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="step-box">
-          <i class="bi bi-search"></i>
-          <h5>1. Search</h5>
-          <p>Use our powerful search tool to find exactly what you need by location or keyword.</p>
-        </div>
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6" data-aos="fade-right">
+        <img src="/images/home-whyus.jpg" alt="EduRadar" class="img-fluid">
       </div>
-      <div class="col-md-4">
-        <div class="step-box">
-          <i class="bi bi-collection"></i>
-          <h5>2. Explore</h5>
-          <p>Browse through verified and detailed listings across multiple categories.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="step-box">
-          <i class="bi bi-chat-dots"></i>
-          <h5>3. Connect</h5>
-          <p>Reach out directly to your chosen services and get started instantly!</p>
-        </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <h2 class="display-4 fw-bold">Why Choose <span class="text-primary">EduRadar</span></h2>
+        <p>
+          EduRadar isn’t just a directory. We provide <strong>verified, user-reviewed, and reliable</strong> information 
+          about educational resources around you — saving your time and effort.
+        </p>
+        <ul class="why-list">
+          <li><i class="bi bi-shield-check"></i> Verified Listings you can trust</li>
+          <li><i class="bi bi-chat-left-quote"></i> Genuine User Reviews</li>
+          <li><i class="bi bi-grid-fill"></i> Wide Range of Categories</li>
+          <li><i class="bi bi-lightning-charge"></i> Quick & Easy Access</li>
+        </ul>
       </div>
     </div>
   </div>
 </div>
-<!-- Testimonials -->
+
+
+  <!-- Testimonial Carousel -->
+  <style>
+    .testimonial-carousel {
+      background: #f8f9fa;
+      padding: 70px 0;
+      text-align: center;
+    }
+
+    .carousel-item p {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #444;
+    }
+
+    .carousel-item img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin: 15px auto;
+      border: 3px solid #2A73E8;
+    }
+  </style>
+  <div class="testimonial-carousel">
+    <div class="container">
+      <h2 class="fw-bold mb-4">What Our Users Say</h2>
+      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <p>"EduRadar helped me find a library near my home instantly!"</p>
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="user">
+            <h6>Rohit Mehta</h6>
+          </div>
+          <div class="carousel-item">
+            <p>"The coaching center suggestions were spot on. Highly reliable."</p>
+            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="user">
+            <h6>Priya Singh</h6>
+          </div>
+          <div class="carousel-item">
+            <p>"Clean UI, fast search, exactly what I needed for studies."</p>
+            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="user">
+            <h6>Aman Yadav</h6>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <style>
+    .feature-section {
+      background: linear-gradient(135deg, #e6f4f1, #f8f9fa);
+      padding: 70px 0;
+    }
+
+    .feature-box {
+      padding: 30px 20px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+      text-align: center;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #003e29;
+    }
+
+    .feature-desc {
+      font-size: 0.95rem;
+      color: #666;
+    }
+  </style>
+  <div class="feature-section">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-4">🚀 Top Features</h2>
+      <p class="text-muted text-center mb-5">EduRadar brings powerful tools to make your learning journey smooth &
+        reliable.</p>
+      <div class="row g-4" id="featureContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    const features = [
+      { icon: "bi bi-lightbulb-fill", bg: "bg-primary", title: "Personalized Suggestions", desc: "Smart recommendations tailored to your needs." },
+      { icon: "bi bi-shield-lock-fill", bg: "bg-success", title: "Secure Access", desc: "We ensure your data and activity are always safe." },
+      { icon: "bi bi-speedometer2", bg: "bg-danger", title: "Fast Navigation", desc: "Quick access to all services with optimized UI." },
+      { icon: "bi bi-people-fill", bg: "bg-warning", title: "Trusted by Thousands", desc: "Join a growing community of happy learners." }
+    ];
+    const featureContainer = document.getElementById("featureContainer");
+    features.forEach(f => {
+      const col = document.createElement("div");
+      col.className = "col-lg-3 col-md-6";
+      col.innerHTML = `
+      <div class="feature-box">
+        <div class="feature-icon ${f.bg}"><i class="${f.icon}"></i></div>
+        <h5 class="feature-title">${f.title}</h5>
+        <p class="feature-desc">${f.desc}</p>
+      </div>`;
+      featureContainer.appendChild(col);
+    });
+  </script>
+<!-- Stats Section -->
 <style>
-  .testimonial-section {
-    background: linear-gradient(to right, #2A73E8, #2c0859);
+  .stats-section {
+    background: linear-gradient(135deg, #2A73E8, #6a11cb);
     color: #fff;
+    padding: 70px 0;
     text-align: center;
-    padding: 60px 0;
   }
 
-  .testimonial-box {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 25px;
-    border-radius: 16px;
-    height: 100%;
+  .stat-box {
+    padding: 20px;
   }
 
-  .testimonial-box p {
-    font-style: italic;
-  }
-</style>
-
-<div class="testimonial-section">
-  <div class="container">
-    <h2 class="fw-bold mb-4">What Our Users Say</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="testimonial-box">
-          <p>"Found the perfect coaching center in no time! Truly helpful platform."</p>
-          <h6 class="mt-3">- Riya Sharma</h6>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="testimonial-box">
-          <p>"Easy to navigate and very intuitive. Saved me a lot of time."</p>
-          <h6 class="mt-3">- Arjun Verma</h6>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="testimonial-box">
-          <p>"Great UI, amazing suggestions. Loved using this service!"</p>
-          <h6 class="mt-3">- Sneha Kapoor</h6>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Features Section -->
-<style>
-  .feature-section {
-    background: #f8f9fa;
-    padding: 60px 0;
-  }
-
-  .feature-box {
-    padding: 30px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
-    transition: all 0.3s ease;
-    height: 100%;
-  }
-
-  .feature-box:hover {
-    transform: translateY(-5px);
-  }
-
-  .feature-box i {
+  .stat-box h2 {
     font-size: 2.5rem;
+    font-weight: 800;
     margin-bottom: 10px;
   }
+
+  .stat-box p {
+    font-size: 1.1rem;
+    color: #f1f1f1;
+  }
 </style>
 
-<div class="feature-section">
+<div class="stats-section">
   <div class="container">
-    <h2 class="fw-bold text-center mb-5">Top Features</h2>
-    <div class="row g-4 text-center">
-      <div class="col-md-3">
-        <div class="feature-box">
-          <i class="bi bi-lightbulb-fill text-primary"></i>
-          <p class="fw-medium mt-2">Personalized Suggestions</p>
+    <div class="row g-4">
+      <div class="col-md-3 col-6">
+        <div class="stat-box">
+          <h2 class="counter" data-target="1200">0</h2>
+          <p>Listings</p>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="feature-box">
-          <i class="bi bi-shield-lock-fill text-success"></i>
-          <p class="fw-medium mt-2">Secure Access</p>
+      <div class="col-md-3 col-6">
+        <div class="stat-box">
+          <h2 class="counter" data-target="500">0</h2>
+          <p>Coaching Centers</p>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="feature-box">
-          <i class="bi bi-speedometer2 text-danger"></i>
-          <p class="fw-medium mt-2">Fast Navigation</p>
+      <div class="col-md-3 col-6">
+        <div class="stat-box">
+          <h2 class="counter" data-target="300">0</h2>
+          <p>Libraries</p>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="feature-box">
-          <i class="bi bi-people-fill text-warning"></i>
-          <p class="fw-medium mt-2">Trusted by Thousands</p>
+      <div class="col-md-3 col-6">
+        <div class="stat-box">
+          <h2 class="counter" data-target="800">0</h2>
+          <p>Active Users</p>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- CTA Section -->
-<style>
-  .cta-section {
-    background: white;
-    color: black;
-    text-align: center;
-    padding: 60px 20px;
-  }
 
-  .cta-section .btn {
-    background-color: #ffbb33;
-    color: white;
-    border: none;
-    font-weight: 600;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-size: 1rem;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-  }
+<script>
+  const counters = document.querySelectorAll('.counter');
 
-  .cta-section .btn:hover {
-    background-color: #e6a600;
-    transform: translateY(-2px);
-  }
-</style>
+  const animateCounter = counter => {
+    const target = +counter.getAttribute('data-target');
+    let c = 0;
+    const increment = target / 200;
 
-<div class="cta-section">
-  <div class="container">
-    <h2 class="fw-bold">Ready to Get Started?</h2>
-    <p class="lead">Explore listings or create an account to access personalized features.</p>
-    <a href="/listings" class="btn btn-lg">Explore Now</a>
+    const updateCounter = () => {
+      c += increment;
+      if (c < target) {
+        counter.innerText = Math.ceil(c);
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.innerText = target + "+";
+      }
+    };
+
+    updateCounter();
+  };
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counter = entry.target;
+        animateCounter(counter);
+        observer.unobserve(counter); // Animate only once
+      }
+    });
+  }, { threshold: 0.5 }); // Trigger when 50% of element is visible
+
+  counters.forEach(counter => observer.observe(counter));
+</script>
+
+
+  <!-- CTA Section -->
+  <style>
+    .cta-section {
+      background: white;
+      color: black;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .cta-section .btn {
+      background-color: #ffbb33;
+      color: white;
+      border: none;
+      font-weight: 600;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 1rem;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .cta-section .btn:hover {
+      background-color: #e6a600;
+      transform: translateY(-2px);
+    }
+  </style>
+  <div class="cta-section">
+    <div class="container">
+      <h2 class="fw-bold">Ready to Get Started?</h2>
+      <p class="lead">Explore listings or create an account to access personalized features.</p>
+      <a href="/listings" class="btn btn-lg">Explore Now</a>
+    </div>
   </div>
-</div>
+
+  

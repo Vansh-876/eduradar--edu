@@ -43,7 +43,7 @@
 
 <div class="container py-5 mt-5">
   <div class="text-center">
-    <h2 class="mb-4">Edit Listing</h2>
+     <h3 class="display-6 fw-bold">Edit<span class="text-primary"> Listing</span></h3>
   </div>
 
   <form class="needs-validation" novalidate action="/listings/<%= listing._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
@@ -73,7 +73,6 @@
       <label for="category" class="form-label">Category</label>
       <select class="form-select" name="listing[category]" id="category" required>
         <option value="">Select Category</option>
-        <option value="Bookstore" <%= listing.category === 'Bookstore' ? 'selected' : '' %>>Bookstore</option>
         <option value="Library" <%= listing.category === 'Library' ? 'selected' : '' %>>Library</option>
         <option value="Stationery" <%= listing.category === 'Stationery' ? 'selected' : '' %>>Stationery</option>
         <option value="Cyber Cafe" <%= listing.category === 'Cyber Cafe' ? 'selected' : '' %>>Cyber Cafe</option>

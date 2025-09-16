@@ -1,111 +1,189 @@
 <% layout("/layouts/boilerplate") %>
-  <style>
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      justify-content: left;
-      margin: 1.5rem 1rem;
-      text-decoration: none !important;
-      align-items: flex-start !important;
-      text-align: left;
-    }
 
+<style>
+  /* ---------- MODERN FILTER SECTION ---------- */
+  .filters-section {
+    display: flex;
+    margin-top: 70px;
+    justify-content: center;
+    padding: 3rem 1rem 2rem;
+    background: white;
+  }
+
+  .filters-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    background: #fff;
+    border-radius: 2rem;
+    padding: 2rem 2.5rem;
+    max-width: 850px;
+    width: 90%;
+    box-shadow: 0 10px 35px rgba(77, 125, 236, 0.12);
+    transition: all 0.3s ease;
+  }
+
+  .filters-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(99, 158, 247, 0.18);
+  }
+
+  .filters-heading {
+    text-align: center;
+  }
+
+  .filters-heading h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+  }
+
+  .filters-heading p {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0.3rem 0 0 0;
+  }
+
+  .filters-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem;
+    width: 100%;
+  }
+
+  .filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 75px;
+    padding: 0.55rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: #555;
+    background: #f2f2f2;
+    gap: 0.3rem;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+  }
+
+  .filter i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .filter p {
+    margin: 0;
+    font-size: 0.75rem;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    background: #2a73e8;
+    color: #fff !important;
+  }
+
+  .filter:hover i {
+    transform: scale(1.2) rotate(-10deg);
+  }
+.listings-container {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .filters-container {
+    padding: 1.5rem 1.5rem;
+    }
+    .filters-heading h2 {
+      font-size: 1.5rem;
+    }
+    .filters-heading p {
+      font-size: 0.85rem;
+    }
     .filter {
-      margin-right: 2rem !important;
-      text-align: center;
-      opacity: 0.7 !important;
-      color: black !important;
-      text-decoration: none !important;
-      min-width: 80px;
-
+      min-width: 60px;
+      padding: 0.45rem 0.8rem;
+      font-size: 0.75rem;
     }
-
-
+    .filter i {
+      font-size: 1rem;
+    }
     .filter p {
-      font-size: 0.8rem;
+      font-size: 0.65rem;
     }
+  }
 
-    .filter:hover {
-      opacity: 1 !important;
-      cursor: pointer;
+  @media (max-width: 480px) {
+    .filters-container {
+      padding: 1rem 1rem;
     }
-
-    /* .main {
-      margin-left: 20px;
-      margin-right: 20px;
-      margin-top: 2rem;
-    } */
-
-    body {
-      padding-top: 5rem;
+    .filters-heading h2 {
+      font-size: 1.3rem;
     }
-
-    .listings-container {
-      margin-bottom: 3rem;
+    .filters-heading p {
+      font-size: 0.75rem;
     }
-
-    .card {
-      transition: transform 0.2s ease, box-shadow 0.25s ease;
-      background-color: #fff;
-      border: 1px solid #eaeaea;
+    .filter {
+      min-width: 55px;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.65rem;
     }
-
-    .card-body {
-      padding: 1rem !important;
+    .filter i {
+      font-size: 0.9rem;
     }
-
-    .card:hover {
-      transform: translateY(-5px);
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    .filter p {
+      font-size: 0.6rem;
     }
+  }
+</style>
 
+<section class="filters-section">
+  <div class="filters-container">
+    <!-- Heading inside the oval -->
+    <div class="filters-heading">
+      <h2 class="display-4 fw-bold">Explore <span class="text-primary">Nearby Services</span></h2>
+      <p>Find coaching, libraries, cyber cafes, stationery stores, and more.</p>
+    </div>
 
-    .card-body p {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-    }
+    <!-- Filters buttons -->
+    <div class="filters-buttons">
+      <a href="/listings" class="filter">
+        <i class="fa-solid fa-globe"></i>
+        <p>All</p>
+      </a>
+      <a href="/listings?category=Coaching" class="filter">
+        <i class="fa-solid fa-chalkboard-user"></i>
+        <p>Coaching</p>
+      </a>
+      <a href="/listings?category=Cyber Cafe" class="filter">
+        <i class="fa-solid fa-computer"></i>
+        <p>Cyber Cafe</p>
+      </a>
+      <a href="/listings?category=Library" class="filter">
+        <i class="fa-solid fa-book-open"></i>
+        <p>Library</p>
+      </a>
+      <a href="/listings?category=Stationery" class="filter">
+        <i class="fa-solid fa-pencil-ruler"></i>
+        <p>Stationery</p>
+      </a>
+      <a href="/listings?category=Bookstore" class="filter">
+        <i class="fa-solid fa-book"></i>
+        <p>Bookstore</p>
+      </a>
+      <a href="/listings?category=Institution" class="filter">
+        <i class="fa-solid fa-school"></i>
+        <p>Institution</p>
+      </a>
+    </div>
+  </div>
+</section>
 
-    .card-img-top {
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-    }
-  </style>
-
-<div class="filters">
-  <a href="/listings" class="filter">
-    <div><i class="fa-solid fa-globe"></i></div>
-    <p>All</p>
-  </a>
-  <a href="/listings?category=Coaching" class="filter">
-    <div><i class="fa-solid fa-chalkboard-user"></i></div>
-    <p>Coaching</p>
-  </a>
-  <a href="/listings?category=Cyber Cafe" class="filter">
-    <div><i class="fa-solid fa-computer"></i></div>
-    <p>Cyber Cafe</p>
-  </a>
-  <a href="/listings?category=Library" class="filter">
-    <div><i class="fa-solid fa-book-open"></i></div>
-    <p>Library</p>
-  </a>
-  <a href="/listings?category=Stationery" class="filter">
-    <div><i class="fa-solid fa-pencil-ruler"></i></div>
-    <p>Stationery</p>
-  </a>
-  <a href="/listings?category=Bookstore" class="filter">
-    <div><i class="fa-solid fa-book"></i></div>
-    <p>Bookstore</p>
-  </a>
-  <a href="/listings?category=institution" class="filter">
-    <div><i class="fa-solid fa-school"></i></div>
-    <p>Institution</p>
-  </a>
-</div>
 
 
   <div class="container-fluid px-3 listings-container">
@@ -218,4 +296,132 @@ document.querySelectorAll('.bookmark-form').forEach(form => {
     }
   });
 });
+</script>
+
+<!-- EduRadar Scroll Popup -->
+<div id="businessPopup" class="popup-overlay">
+  <div class="popup-content">
+    <span class="close-btn">&times;</span>
+    <div class="popup-header">
+      <h2>Grow Your Business with EduRadar</h2>
+      <p>Reach thousands of students nearby by listing your services on EduRadar. Start growing your business today!</p>
+    </div>
+
+    <a href="/vendor/register" id="addBusinessBtn">Add Your Business</a>
+  </div>
+</div>
+
+<style>
+  /* ---------- POPUP OVERLAY ---------- */
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+  }
+
+  .popup-content {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    color:linear-gradient(100deg,  #2A73E8, #2c0859);
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .popup-content h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: linear-gradient(100deg, #2A73E8, #2c0859);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+  .popup-content p {
+    font-size: 1rem;
+    margin-bottom: 3.5rem;
+    line-height: 1.8;
+  }
+
+  .popup-content input {
+    width: 80%;
+    padding: 0.7rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+  }
+
+  .popup-content a {
+    background-color:  #fbc531;
+    color: #000;
+    text-decoration: none;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .popup-content a:hover {
+    background-color:  #e6b022;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 0.8rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: rgb(1, 0, 0);
+  }
+
+  /* Responsive */
+  @media (max-width: 500px) {
+    .popup-content h2 {
+      font-size: 1.4rem;
+    }
+    .popup-content p {
+      font-size: 0.9rem;
+    }
+    .popup-content input {
+      width: 100%;
+    }
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('businessPopup');
+    const closeBtn = document.querySelector('.close-btn');
+
+    // Check if user/vendor is logged in from EJS
+    const userLoggedIn = <%= currentUser ? 'true' : 'false' %>;
+
+    if (!userLoggedIn) {
+      // Show popup on scroll
+      const showPopupOnScroll = () => {
+        if (window.scrollY > 1000) { // adjust scroll position if needed
+          popup.style.display = 'flex';
+          window.removeEventListener('scroll', showPopupOnScroll);
+        }
+      };
+      window.addEventListener('scroll', showPopupOnScroll);
+    }
+
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+  });
 </script>

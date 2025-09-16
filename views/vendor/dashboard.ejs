@@ -8,22 +8,26 @@
   }
 
   .dashboard-container {
-    max-width: 1280px;
-    margin: 70px auto;
-    padding: 30px 20px;
+    max-width: 1400px;
+    margin: 80px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
   }
 
   /* Header / Greeting */
   .dashboard-header {
-    background: rgba(0, 62, 41, 0.95);
+    background: linear-gradient(to right, #2A73E8, #2c0859);
     color: #fff;
-    padding: 35px;
+    padding: 30px 25px;
     border-radius: 20px;
-    margin-top: 60px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    box-shadow: 0 12px 35px rgba(0, 62, 41, 0.25);
+    align-items: center;
+    box-shadow: 0 12px 35px rgba(42,115,232,0.25);
+    flex-wrap: wrap;
+    gap: 15px;
   }
 
   .dashboard-header h2 {
@@ -33,22 +37,23 @@
   }
 
   .dashboard-header p {
-    margin-top: 8px;
+    margin: 5px 0 0 0;
     opacity: 0.9;
   }
 
   .dashboard-header a {
-    background: white;
-    color: #003e29;
+    background: #fff;
+    color: #2A73E8;
     font-weight: 600;
     padding: 8px 18px;
-    border-radius: 10px;
+    border-radius: 12px;
+    text-decoration: none!important;
     transition: 0.3s;
   }
 
   .dashboard-header a:hover {
-    background: #467061;
-    color: white;
+    background: #2A73E8;
+    color: #fff;
   }
 
   /* Stats Section */
@@ -56,17 +61,15 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 25px;
-    margin: 40px 0;
   }
 
   .stat-card {
-    background: white;
+    background: #fff;
     border-radius: 18px;
     padding: 25px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.06);
     transition: 0.3s ease;
     text-align: center;
-    position: relative;
   }
 
   .stat-card:hover {
@@ -76,7 +79,7 @@
 
   .stat-icon {
     font-size: 2rem;
-    color: #003e29;
+    color: #2A73E8;
     margin-bottom: 12px;
   }
 
@@ -84,7 +87,7 @@
     margin: 0;
     font-size: 1rem;
     font-weight: 600;
-    color: #003e29;
+    color: #2c0859;
   }
 
   .stat-card .number {
@@ -93,12 +96,27 @@
     margin-top: 6px;
   }
 
+  .progress-bar-container {
+    width: 100%;
+    height: 6px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: linear-gradient(to right, #2A73E8, #2c0859);
+    border-radius: 10px;
+    width: 0;
+    transition: 1s ease;
+  }
+
   /* Quick Actions */
   .quick-actions {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 25px;
-    margin: 40px 0;
   }
 
   .action-card {
@@ -107,10 +125,11 @@
     padding: 25px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: 0.3s;
+    text-align: center;
   }
 
   .action-card:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
     box-shadow: 0 12px 25px rgba(0,0,0,0.1);
   }
 
@@ -118,7 +137,7 @@
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 8px;
-    color: #003e29;
+    color: #2c0859;
   }
 
   .action-card p {
@@ -128,22 +147,23 @@
   }
 
   .action-card a {
-    background: #003e29;
-    color: white;
-    padding: 6px 14px;
+    background: linear-gradient(to right, #2A73E8, #2c0859);
+    color: #fff;
+    padding: 8px 18px;
     border-radius: 10px;
-    font-size: 0.85rem;
     font-weight: 500;
+    text-decoration: none!important;
     transition: 0.3s;
+    display: inline-block;
   }
 
   .action-card a:hover {
-    background: #467061;
+    opacity: 0.85;
   }
 
   /* Recent Listings */
   .recent-listings {
-    background: white;
+    background: #fff;
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.06);
@@ -152,7 +172,7 @@
   .recent-listings h4 {
     margin-bottom: 20px;
     font-weight: 700;
-    color: #003e29;
+    color: #2c0859;
   }
 
   .listing-item {
@@ -161,16 +181,15 @@
     justify-content: space-between;
     border-bottom: 1px solid #eee;
     padding: 15px 0;
-  }
-
-  .listing-item:last-child {
-    border-bottom: none;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .listing-details {
     display: flex;
     gap: 15px;
     align-items: center;
+    flex: 1 1 auto;
   }
 
   .listing-details img {
@@ -190,124 +209,64 @@
     color: #666;
   }
 
-  .listing-actions a,
-  .listing-actions button {
-    margin-left: 8px;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 0.8rem;
+  .listing-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
   .btn-edit {
-    background: #f6c343;
-    color: #222;
+    background: #2A73E8;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    text-decoration: none;
   }
 
   .btn-delete {
     background: #e55353;
-    color: white;
+    color: #fff;
     border: none;
-  }
-
-  /* ---------------------- Responsive Dashboard ---------------------- */
-@media (max-width: 992px) {
-  .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-
-  .dashboard-header h2 {
-    font-size: 1.5rem;
-  }
-
-  .dashboard-header p {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .stats-row {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .quick-actions {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .recent-listings .listing-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .listing-details {
-    gap: 10px;
-    width: 100%;
-  }
-
-  .listing-details img {
-    width: 100%;
-    max-width: 150px;
-    height: auto;
-  }
-
-  .listing-actions {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
-  }
-
-  .action-card h6 {
-    font-size: 1rem;
-  }
-
-  .action-card p {
+    padding: 6px 14px;
+    border-radius: 8px;
     font-size: 0.85rem;
   }
 
-  .stat-card h5 {
-    font-size: 0.95rem;
+  /* Responsive */
+  @media(max-width: 992px) {
+    .stats-row, .quick-actions {
+      grid-template-columns: 1fr;
+    }
+    .dashboard-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .listing-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .listing-actions {
+      justify-content: flex-start;
+    }
   }
 
-  .stat-card .number {
-    font-size: 1.4rem;
+  @media(max-width: 480px) {
+    .dashboard-header h2 {
+      font-size: 1.5rem;
+    }
+    .dashboard-header p {
+      font-size: 0.9rem;
+    }
   }
-}
-
-@media (max-width: 480px) {
-  .dashboard-container {
-    padding: 20px 15px;
-  }
-
-  .dashboard-header {
-    padding: 25px;
-    border-radius: 15px;
-  }
-
-  .action-card {
-    padding: 20px;
-    border-radius: 15px;
-  }
-
-  .recent-listings {
-    padding: 20px;
-    border-radius: 15px;
-  }
-}
-
 </style>
 
-
 <div class="dashboard-container">
-
   <!-- Header -->
   <div class="dashboard-header">
     <div>
-      <h2>Welcome back, <%= user.username %> 👋</h2>
+      <h2>Welcome back, <%= user ? user.username : 'Guest' %> 👋</h2>
       <p>Here’s a quick overview of your business insights.</p>
     </div>
     <div>
@@ -320,22 +279,26 @@
     <div class="stat-card">
       <div class="stat-icon"><i class="fas fa-list"></i></div>
       <h5>Total Listings</h5>
-      <div class="number">12</div>
+      <div class="number"><%= listings.length %></div>
+      <div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div>
     </div>
     <div class="stat-card">
       <div class="stat-icon"><i class="fas fa-bookmark"></i></div>
       <h5>Bookings</h5>
       <div class="number">47</div>
+      <div class="progress-bar-container"><div class="progress-bar" style="width: 60%;"></div></div>
     </div>
     <div class="stat-card">
       <div class="stat-icon"><i class="fas fa-star"></i></div>
       <h5>Avg. Rating</h5>
       <div class="number">4.8★</div>
+      <div class="progress-bar-container"><div class="progress-bar" style="width: 90%;"></div></div>
     </div>
     <div class="stat-card">
       <div class="stat-icon"><i class="fas fa-users"></i></div>
       <h5>Monthly Visitors</h5>
       <div class="number">1.2k</div>
+      <div class="progress-bar-container"><div class="progress-bar" style="width: 80%;"></div></div>
     </div>
   </div>
 
@@ -359,9 +322,9 @@
   </div>
 
   <!-- Recent Listings -->
-  <div class="recent-listings mt-5">
+  <div class="recent-listings">
     <h4>Recent Listings</h4>
-    <% listings.slice(0, 3).forEach(listing => { %>
+    <% listings.slice(0, 5).forEach(listing => { %>
       <div class="listing-item">
         <div class="listing-details">
           <img src="<%= listing.image.url %>" alt="listing">
@@ -381,3 +344,13 @@
   </div>
 </div>
 
+<script>
+  // Animate progress bars
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      let width = bar.style.width;
+      bar.style.width = '0';
+      setTimeout(() => { bar.style.width = width; }, 300);
+    });
+  });
+</script>

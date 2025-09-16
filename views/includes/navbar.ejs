@@ -1,6 +1,6 @@
 <style>
   /* ---------------------- Base Styles ---------------------- */
-
+  /* ---------------------- Base Styles ---------------------- */
   .navbar {
     background: linear-gradient(to right, #2A73E8, #2c0859);
     padding: 0.7rem 0.7rem;
@@ -51,34 +51,13 @@
     color: #fff;
   }
 
-  .btn-search i {
-    font-size: 1rem;
-  }
-
   .search-input {
     border-radius: 25px;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    font-size: 0.8rem;
-  }
-
-  .dropdown-menu {
-    transition: all 0.2s ease-in-out;
-  }
-
-  .dropdown-menu li a:hover {
-    background: #f0f2f5;
-    border-radius: 8px;
-  }
-
-  .dropdown-toggle img:hover {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
   }
 
   .navbar-toggler {
-    border-color: white;
-  }
-
-  .navbar-toggler:hover {
     border-color: white;
   }
 
@@ -86,18 +65,8 @@
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
   }
 
-  #navbarSearch,
-  #heroSearch {
-    transition: all 0.3s ease;
-  }
-
-  .desktop-search-only {
-    display: none !important;
-  }
-
-  /* ---------------------- Media Query: min-width 768px ---------------------- */
-
-  @media (min-width: 867px) {
+  /* ---------------------- Desktop ---------------------- */
+  @media (min-width: 1200px) {
     .desktop-search-only {
       display: flex !important;
       align-items: center;
@@ -114,39 +83,20 @@
     .desktop-search-only .search-input {
       max-width: 200px;
     }
-
-    .desktop-search-only .form-control,
-    .desktop-search-only .btn-search {
-      height: 40px;
-      padding: 0.375rem 1rem;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .btn-search i {
-      display: inline !important;
-      font-size: 1rem;
-    }
   }
 
-  /* ---------------------- Media Query: 875px to 1013px ---------------------- */
-
-  @media (max-width: 1200px) and (min-width: 775px) {
+  /* ---------------------- Tablet ---------------------- */
+  @media (max-width: 1199px) and (min-width: 768px) {
     .navbar-nav.ms-auto {
       flex-direction: row !important;
-      flex-wrap: nowrap !important;
       gap: 0.8rem;
       align-items: center;
     }
 
     .navbar-nav .nav-link {
+      font-size: 0.9rem;
       padding: 0.25rem 0.75rem;
       white-space: nowrap;
-      font-size: 0.9rem;
-    }
-
-    .navbar-nav .dropdown {
-      margin-left: 0.5rem;
     }
 
     .navbar-nav img.rounded-circle {
@@ -154,87 +104,48 @@
       height: 35px !important;
     }
 
-    .desktop-search-only .form-control,
-    .desktop-search-only .btn-search {
-      height: 35px;
-      padding: 0.375rem 0.8rem;
-      font-size: 0.7rem;
-      line-height: 1.2;
+    .desktop-search-only {
+      display: none !important;
+      /* tablet pe search bar hata diya */
     }
   }
 
-  /* ---------------------- Media Query: max-width 768px ---------------------- */
-
-  @media (max-width: 866px) {
+  /* ---------------------- Mobile ---------------------- */
+  @media (max-width: 767px) {
     .navbar-collapse {
-       background: linear-gradient(to right, rgba(44, 8, 89, 0.75), rgba(42, 115, 232, 0.75));
+      background: linear-gradient(to right, rgba(44, 8, 89, 0.9), rgba(42, 115, 232, 0.9));
       padding: 1rem;
       border-radius: 12px;
       backdrop-filter: blur(10px);
-       -webkit-backdrop-filter: blur(10px);
-       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-       border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease-in-out;
-    }
-
-    .navbar .container-fluid {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-
-    .navbar-brand {
-      margin-left: 5px !important;
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      text-align: center;
     }
 
     .navbar-nav {
-      align-items: center !important;
+      flex-direction: column !important;
+      align-items: center;
+      gap: 1rem;
     }
 
     .navbar-collapse .nav-link {
-      padding: 0.5rem 1rem;
+      font-size: 1rem;
       width: 100%;
       text-align: center;
-    }
-  }
-
-  /* ---------------------- Media Query: max-width 700px ---------------------- */
-
-  @media (max-width: 700px) {
-    .navbar-nav.ms-auto {
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
+      padding: 0.5rem;
     }
 
-    .navbar-nav .nav-link {
-      font-size: 0.95rem;
+    .navbar-nav img.rounded-circle {
+      width: 40px !important;
+      height: 40px !important;
     }
 
     .dropdown-menu {
       font-size: 0.9rem;
-    }
-
-    .navbar-collapse {
-      gap: 1rem;
-    }
-
-    .navbar-nav img.rounded-circle {
-      width: 35px !important;
-      height: 35px !important;
-    }
-
-    .navbar-collapse .nav-link {
-      padding: 0.5rem 0.75rem;
-    }
-  }
-
-  @media (max-width: 900px) and (min-width: 768px) {
-    .nav-explore {
-      display: none !important;
+      text-align: left;
     }
   }
 </style>
-
 <nav class="navbar navbar-expand-md border-bottom fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand fw-bold" href="/">

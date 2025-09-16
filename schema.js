@@ -17,7 +17,6 @@ const listingSchema = Joi.object({
     }),
 
     category: Joi.string().valid(
-      'Bookstore',
       'Library',
       'Stationery',
       'Cyber Cafe',

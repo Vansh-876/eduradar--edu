@@ -1,178 +1,270 @@
 <% layout("/layouts/boilerplate") %>
 
-  <style>
-    .signup-container {
-      min-height: 100vh;
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem 2rem;
-    }
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+<style>
+  .signup-container {
+    min-height: 100vh;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem 2rem;
+  }
+
+  .signup-card {
+    display: flex;
+    flex-wrap: wrap;
+    background: #2b2b3c;
+    color: black;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    max-width: 1100px;
+    width: 100%;
+    height: auto;
+    margin-top: 2.5rem;
+  }
+
+  .signup-img-section {
+    flex: 1 1 45%;
+    background: url("/images/register-user.jpg") center/cover no-repeat;
+    padding: 2rem;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+  }
+
+  .signup-form-section {
+    flex: 1 1 55%;
+    background: white;
+    padding: 2rem 2rem;
+  }
+
+  .signup-form-section h3 {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .form-control,
+  .btn {
+    border-radius: 10px;
+  }
+
+  .btn-primary {
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    background-color: #5a4bdc;
+  }
+
+  .custom-info-link {
+    color: #6c5ce7;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .custom-info-link:hover {
+    color: #5a4bdc;
+    text-decoration: underline;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    border: 1.5px solid #ccc;
+    box-shadow: none;
+    padding: 0.4rem 0.4rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 0 0.15rem rgba(108, 92, 231, 0.25);
+    outline: none;
+  }
+
+  .form-label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .signup-form-section form .mb-3 {
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 38px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #6c5ce7;
+  }
+
+  /* Error Box */
+  #errorBox {
+    display: none;
+    background: linear-gradient(135deg, #ff4d6d, #ff758c);
+    border-left: 5px solid #ff1f4b;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    animation: slideDown 0.4s ease forwards;
+  }
+  #errorBox p {
+    color: white;
+    margin: 0;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  @keyframes slideDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
     .signup-card {
-      display: flex;
-      flex-wrap: wrap;
-      background: #2b2b3c;
-      color: black;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
-      max-width: 1100px;
-      width: 100%;
-      height: auto;
-      margin-top: 2.5rem;
+      flex-direction: column;
+      margin-top: 2.8rem;
     }
 
     .signup-img-section {
-      flex: 1 1 45%;
-      background: url("/images/loginbg.jpg") center/cover no-repeat;
-      padding: 2rem;
-      display: flex;
-      align-items: end;
-      justify-content: center;
-      min-height: 400px;
-      text-align: center;
-    }
-
-    .signup-img-section h2 {
-      font-size: 1.4rem;
-      font-weight: 500;
-      color: black;
-    }
-
-    .signup-form-section {
-      flex: 1 1 55%;
-      background: white;
-      padding: 2rem 2rem;
+      min-height: 250px;
+      background-position: center;
+      background-size: cover;
     }
 
     .signup-form-section h3 {
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      font-size: 1.8rem;
-      text-align: center;
+      font-size: 1.65rem;
     }
 
-    .form-control,
-    .btn {
-      border-radius: 10px;
+    .toggle-password {
+      top: 35px;
     }
+  }
+</style>
 
-    .btn-primary {
-      background-color: #6c5ce7;
-      border-color: #6c5ce7;
-      font-weight: 500;
-    }
+<div class="signup-container">
+  <div class="signup-card">
+    <div class="signup-img-section"></div>
 
-    .btn-primary:hover {
-      background-color: #5a4bdc;
-    }
+    <div class="signup-form-section">
+      <h3>Create an Account</h3>
 
-    .custom-info-link {
-      color: #6c5ce7;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
+      <!-- Modern Error Box -->
+      <div id="errorBox">
+        <p id="errorMessage"></p>
+      </div>
 
-    .custom-info-link:hover {
-      color: #5a4bdc;
-      text-decoration: underline;
-    }
-
-    .form-control {
-      border-radius: 10px;
-      border: 1.5px solid #ccc;
-      box-shadow: none;
-      padding: 0.4rem 0.4rem;
-      font-size: 1rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .form-control:focus {
-      border-color: #6c5ce7;
-      box-shadow: 0 0 0 0.15rem rgba(108, 92, 231, 0.25);
-      outline: none;
-    }
-
-    .form-label {
-      font-weight: 500;
-      margin-bottom: 0.3rem;
-    }
-
-    .signup-form-section form .mb-3 {
-      margin-bottom: 1.25rem;
-    }
-
-    @media (max-width: 768px) {
-      .signup-card {
-        flex-direction: column;
-        margin-top: 2.8rem;
-      }
-
-      .signup-img-section {
-        min-height: 250px;
-        background-position: center;
-        background-size: cover;
-      }
-
-      .signup-form-section h3 {
-        font-size: 1.65rem;
-      }
-    }
-  </style>
-
-  <div class="signup-container">
-    <div class="signup-card">
-      <div class="signup-img-section"></div>
-
-      <div class="signup-form-section">
-        <h3>Create an Account</h3>
-
-        <form action="/register" method="POST">
-          <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" name="username" class="form-control" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" name="confirmPassword" class="form-control" required>
-          </div>
-
-          <button type="submit" class="btn btn-primary w-100 mt-2">Register</button>
-        </form>
-
-        <div class="mt-4 text-center">
-          <small>Already have an account? <a href="/login" class="custom-info-link">Login</a></small>
+      <form action="/register" method="POST" novalidate>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" required>
         </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" 
+                 name="email" 
+                 class="form-control" 
+                 required
+                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                 title="Please enter a valid email address">
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" id="password" class="form-control" required>
+          <i class="bi bi-eye-slash toggle-password" data-target="password"></i>
+          <small class="text-muted">Min 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special</small>
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" required>
+          <i class="bi bi-eye-slash toggle-password" data-target="confirmPassword"></i>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mt-2">Register</button>
+      </form>
+
+      <div class="mt-4 text-center">
+        <small>Already have an account? <a href="/login" class="custom-info-link">Login</a></small>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Optional: Bootstrap Validation Script -->
-  <script>
-    (() => {
-      'use strict';
-      const forms = document.querySelectorAll('.needs-validation');
-      Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    })();
-  </script>
+<script>
+  // Toggle password show/hide
+  document.querySelectorAll('.toggle-password').forEach(icon => {
+    icon.addEventListener('click', function () {
+      const targetId = this.getAttribute('data-target');
+      const input = document.getElementById(targetId);
+      if (input.type === "password") {
+        input.type = "text";
+        this.classList.remove("bi-eye-slash");
+        this.classList.add("bi-eye");
+      } else {
+        input.type = "password";
+        this.classList.remove("bi-eye");
+        this.classList.add("bi-eye-slash");
+      }
+    });
+  });
+
+  const form = document.querySelector('form');
+  const errorBox = document.getElementById('errorBox');
+  const errorMessage = document.getElementById('errorMessage');
+
+  form.addEventListener('submit', function (e) {
+    const username = document.querySelector('input[name="username"]').value.trim();
+    const email = document.querySelector('input[name="email"]').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+
+    if (username === "") {
+      e.preventDefault();
+      errorMessage.textContent = "Username cannot be empty.";
+      errorBox.style.display = "block";
+      return;
+    }
+
+    if (!emailPattern.test(email)) {
+      e.preventDefault();
+      errorMessage.textContent = "Please enter a valid email address.";
+      errorBox.style.display = "block";
+      return;
+    }
+
+    if (!passwordPattern.test(password)) {
+      e.preventDefault();
+      errorMessage.textContent = "Password must be at least 8 chars, include uppercase, lowercase, number, and special character.";
+      errorBox.style.display = "block";
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      e.preventDefault();
+      errorMessage.textContent = "Passwords do not match.";
+      errorBox.style.display = "block";
+      return;
+    }
+
+    errorBox.style.display = "none";
+  });
+</script>

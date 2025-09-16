@@ -1,17 +1,24 @@
 const User = require("../models/user");
+const { isValidEmail } = require("../utils/validators");
 
 // Render Signup Form
 module.exports.renderSignupForm = (req, res) => {
   res.render("users/register", { activePage: "register" });
 };
 
-// Handle Signup
 module.exports.signup = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
-    const user = new User({ username, email, role: ['user'] });
+
+    // email format check
+    if (!isValidEmail(email)) {
+      req.flash("error", "Please enter a valid email address.");
+      return res.redirect("/register");
+    }
+
+    const user = new User({ username, email, role: ["user"] });
     const registeredUser = await User.register(user, password);
-    console.log(registeredUser);
+
     req.login(registeredUser, (err) => {
       if (err) return next(err);
       req.flash("success", "Welcome to EduRadar!");
@@ -107,11 +114,16 @@ module.exports.renderVendorRegisterForm = (req, res) => {
   res.render('vendor/register', { activePage: "vendorRegister" });
 };
 
-// Handle Vendor Registration
 module.exports.vendorRegister = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
-    const user = new User({ username, email, role: ['vendor'] });
+
+    if (!isValidEmail(email)) {
+      req.flash("error", "Please enter a valid email address.");
+      return res.redirect("/vendor/register");
+    }
+
+    const user = new User({ username, email, role: ["vendor"] });
 
     if (req.file) {
       user.profileImage = { url: req.file.path, filename: req.file.filename };
@@ -121,13 +133,12 @@ module.exports.vendorRegister = async (req, res, next) => {
 
     req.login(registeredUser, (err) => {
       if (err) return next(err);
-      req.flash('success', 'Welcome Vendor!');
-      res.redirect('/vendor/dashboard');
+      req.flash("success", "Welcome Vendor!");
+      res.redirect("/vendor/dashboard");
     });
-
   } catch (e) {
-    req.flash('error', e.message);
-    res.redirect('/vendor/register');
+    req.flash("error", e.message);
+    res.redirect("/vendor/register");
   }
 };
 
