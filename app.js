@@ -28,19 +28,15 @@ const bookmarkRoutes = require("./routes/bookmark.js");
 const notificationRoutes = require('./routes/notifications');
 const homeController = require('./controllers/home.js');
 
-// Import socket utility (create this file as below)
+// Socket utility
 const socketUtil = require('./utils/socket');
 
 const dbUrl = process.env.ATLASDB_URL;
 
-// Initialize socket.io via socketUtil
-
+// Socket.io init
 const io = socketUtil.init(server);
-
-// Make io accessible via app locals if needed
 app.set('io', io);
 
-// Socket.io connection handlers
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
@@ -53,7 +49,6 @@ io.on('connection', (socket) => {
     console.log('User disconnected:', socket.id);
   });
 });
-
 
 // Connect to MongoDB and start server
 async function main() {
@@ -68,32 +63,27 @@ async function main() {
     console.error("Error connecting to DB:", err);
   }
 }
-
 main();
 
-// Middleware and view engine setup
+// View engine setup
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejsMate);
 
+// Body parsing & method override
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
+// Static files
 app.use(express.static(path.join(__dirname, "/public")));
 app.use('/images', express.static(path.join(__dirname, "images")));
 
-app.use((req, res, next) => {
-  res.locals.activePage = null;
-  next();
-});
-
-
-// Session Store configuration
+// Session store
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: { secret: process.env.SECRET },
   touchAfter: 24 * 3600,
 });
-
 store.on("error", (err) => {
   console.error("Session store error:", err);
 });
@@ -110,7 +100,6 @@ const sessionConfig = {
     httpOnly: true,
   }
 };
-
 app.use(session(sessionConfig));
 app.use(flash());
 
@@ -121,45 +110,25 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// Flash messages middleware
-app.use((req, res, next) => {
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  next();
-});
-
-// app.js ya routes file me
-app.get('/', (req, res) => {
-  res.locals.activePage = 'home';
-  res.render('home');
-});
-
-app.get('/listings', (req, res) => {
-  res.locals.activePage = 'listings';
-  res.render('listings');
-});
-
-
-// Current user & bookmarks middleware
+// Global locals middleware (must be before routes)
 app.use(async (req, res, next) => {
+  // currentUser
   if (req.user) {
     const user = await User.findById(req.user._id).populate("bookmarks");
     res.locals.currentUser = user;
   } else {
     res.locals.currentUser = null;
   }
-  next();
-});
 
-// Search and location locals
-app.use((req, res, next) => {
+  // flash messages
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+
+  // search & location (optional)
   res.locals.search = req.query.search || "";
   res.locals.location = req.query.location || "";
-  next();
-});
 
-// Notification middleware: unread count & recent
-app.use(async (req, res, next) => {
+  // notification middleware
   if (req.user) {
     try {
       const unreadCount = await Notification.countDocuments({ user: req.user._id, read: false });
@@ -167,7 +136,6 @@ app.use(async (req, res, next) => {
         .sort({ createdAt: -1 })
         .limit(5)
         .lean();
-
       res.locals.notificationCount = unreadCount;
       res.locals.recentNotifications = recent;
     } catch (err) {
@@ -179,9 +147,15 @@ app.use(async (req, res, next) => {
     res.locals.notificationCount = 0;
     res.locals.recentNotifications = [];
   }
+
   next();
 });
 
+// Active page middleware
+app.use((req, res, next) => {
+  res.locals.activePage = null; // will override per route
+  next();
+});
 
 // Routes
 app.use("/", listingRoutes);
@@ -191,20 +165,29 @@ app.use('/', vendorRoutes);
 app.use("/", bookmarkRoutes);
 app.use('/notifications', notificationRoutes);
 
-// Other static pages
-// app.get('/', homeController.homepage);
+// Static pages / other routes
+app.get("/", (req, res) => {
+  res.locals.activePage = 'home';
+  res.render("home");
+});
+app.get("/listings", (req, res) => {
+  res.locals.activePage = 'listings';
+  res.render("listings");
+});
 app.get("/about", (req, res) => res.render("aboutus"));
 app.get("/services", (req, res) => res.render("services"));
-app.get('/features', (req, res) => res.render('features'));
-app.get('/contact', (req, res) => res.render('contact'));
+app.get("/features", (req, res) => res.render("features"));
+app.get("/contact", (req, res) => res.render("contact"));
 app.get("/blog", (req, res) => res.render("blog"));
 app.get("/faq", (req, res) => res.render("faq"));
-app.get('/terms', (req, res) => res.render('terms', { page: 'terms' }));
-app.get('/privacy', (req, res) => res.render('privacy', { page: 'privacy' }));
-app.get('/copyright', (req, res) => res.render('copyright', { page: 'copyright' }));
+app.get("/terms", (req, res) => res.render("terms", { page: 'terms' }));
+app.get("/privacy", (req, res) => res.render("privacy", { page: 'privacy' }));
+app.get("/copyright", (req, res) => res.render("copyright", { page: 'copyright' }));
 
-// 404 and error handler
+// 404 / error handler
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
   res.status(statusCode).render("error", { err });
 });
+
+module.exports = app;
