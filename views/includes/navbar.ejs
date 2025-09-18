@@ -159,7 +159,8 @@
     <div class="collapse navbar-collapse " id="navbarNav">
       <div class="navbar-nav">
         <a class="nav-link" href="/"><i class="fa-solid fa-house"></i><b>Home</b></a>
-        <a class="nav-link nav-explore <% if(activePage === 'listings'){ %>active<% } %>" href="/listings">
+        <a class="nav-link nav-explore <%= (activePage && activePage === 'listings') ? 'active' : '' %>"
+          href="/listings">
           <i class="bi bi-card-list"></i><b>Explore</b>
         </a>
       </div>

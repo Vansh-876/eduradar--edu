@@ -128,6 +128,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// app.js ya routes file me
+app.get('/', (req, res) => {
+  res.locals.activePage = 'home';
+  res.render('home');
+});
+
+app.get('/listings', (req, res) => {
+  res.locals.activePage = 'listings';
+  res.render('listings');
+});
+
+
 // Current user & bookmarks middleware
 app.use(async (req, res, next) => {
   if (req.user) {
@@ -180,7 +192,7 @@ app.use("/", bookmarkRoutes);
 app.use('/notifications', notificationRoutes);
 
 // Other static pages
-app.get('/', homeController.homepage);
+// app.get('/', homeController.homepage);
 app.get("/about", (req, res) => res.render("aboutus"));
 app.get("/services", (req, res) => res.render("services"));
 app.get('/features', (req, res) => res.render('features'));
